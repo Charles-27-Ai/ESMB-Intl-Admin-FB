@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMSB International Admin Dashboard</title>
+    <meta name="description" content="This is the back-end site for staff in EMSB Youth Sector to manipulate announcements displayed on multiple platforms for the international students in EMSB high schools.">
+    <meta name="author" content="English Montreal School Board">
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/App_Assets/images/favicon.png">
+    <title>Admin Press Admin Template - Responsive web app kit dashboard</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/App_Assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/App_Assets/plugins/footable/css/footable.core.css" rel="stylesheet" />
+    <link href="~/App_Assets/plugins/prism/prism.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="~/App_Assets/icons/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/App_Assets/icons/themify-icons/themify-icons.css" rel="stylesheet" />
+    <link href="~/App_Assets/icons/material-design-iconic-font/css/materialdesignicons.min.css" rel="stylesheet" />
+
+    <!-- Spinner -->
+    <link href="~/Content/template/spinners.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Content/template/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="~/Content/template/blue.css" id="theme" rel="stylesheet">
+
+    <!-- Personal CSS -->
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @*@Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body class="fix-header card-no-border">
+    <!-- Preloader - style you can find in spinners.css -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- Preloader end -->
+
+    <div id="main-wrapper">
+        @RenderBody()
+    </div>
+
+    <!-- All jQuery -->
+    <script src="~/App_Assets/plugins/jquery/jquery.min.js"></script>
+    <script src="~/App_Assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/App_Assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.slimscroll.js"></script>
+    <script src="~/Scripts/waves.js"></script>
+    <script src="~/Scripts/sidebarmenu.js"></script>
+    <script src="~/App_Assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="~/App_Assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/Scripts/custom.min.js"></script>
+    <script src="~/App_Assets/plugins/footable/js/footable.all.min.js"></script>
+    <script src="~/App_Assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/Scripts/footable-init.js"></script>
+    <script src="~/App_Assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+    
+    <script src="~/Scripts/Site.js"></script>
+</body>
+</html>
