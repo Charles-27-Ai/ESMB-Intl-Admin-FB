@@ -48,9 +48,27 @@ namespace ESMB_Intl_Admin_FB.Controllers
 
         [HttpPost]
 
-        public ActionResult AddOrEdit()
+        public ActionResult AddOrEdit(TrueAnnouncement anno)
         {
-            return View();
+            if (anno.ImageUpload != null)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(anno.ImageUpload.FileName);
+                string extension = Path.GetExtension(anno.ImageUpload.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;  //确保每个图片文件名唯一，避免上传相同文件
+                anno.ImgPath = "~/App_Files/Images/" + fileName;
+                anno.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/App_Files/Images/"), fileName));
+            }
+            
+            using (DBModel db = new DBModel())
+            {
+                db.TrueAnnouncements.Add(anno);
+                db.SaveChanges();
+                
+            }
+            
+            return RedirectToAction("ViewAll");
         }
+
+        
     }
 }

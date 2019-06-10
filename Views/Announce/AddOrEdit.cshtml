@@ -2,9 +2,8 @@
 
 @{
     ViewBag.Title = "AddOrEdit";
-    Layout = null;
+    //Layout = null;
 }
-
 
 @using (Html.BeginForm("AddOrEdit", "Announce", FormMethod.Post, new
 {
@@ -17,12 +16,9 @@
     @Html.AntiForgeryToken()
 
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.AnnoID)
-        @Html.HiddenFor(model => model.Added)
-        @Html.HiddenFor(model => model.Updated)
-        @Html.HiddenFor(model => model.Status)
-        @Html.HiddenFor(model => model.ImgPath)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.AnnoID)
+    @Html.HiddenFor(model => model.ImgPath)
     <div class="row">
         <div class="col-md-7">
             <div class="form-group">
@@ -39,41 +35,60 @@
                 </div>
 
                 <div class="col-md-12 m-b-20">
-                    @*<textarea class="form-control" rows="8" placeholder="Announcement Text" required></textarea>*@
-                    @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control", @rows = "6", @placeholder = "Announcement Text" } })
+                    @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control", @rows = "5", @placeholder = "Announcement Text" } })
                     @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="col-md-12 m-b-10">
-                    @*<input type="radio" class="check" id="square-radio-1" name="Sender" value="EMSB" data-radio="iradio_square-red">*@
-                    @Html.RadioButtonFor(model => model.Sender, "EMSB", new { @class = "check", @id = "square-radio-1", @name = "Sender", @data_radio = "iradio_square-red"  })
-                    <label for="square-radio-1">Send as EMSB</label>
-                </div>
-                <div class="col-md-12 m-b-30">
                     @*<input type="radio" class="check" id="square-radio-2" name="Sender" value="EMSB-Intl" checked data-radio="iradio_square-red">*@
-                    @Html.RadioButtonFor(model => model.Sender, "EMSB-Intl", new { @class = "check", @id = "square-radio-2", @name = "Sender", @checked = "checked", @data_radio = "iradio_square-red"  })
+                    @Html.RadioButtonFor(model => model.Sender, "EMSB-Intl", new { @class = "check", @id = "square-radio-2", @name = "Sender", @checked = "checked", @data_radio = "iradio_square-blue" })
                     <label for="square-radio-2">Send as ESMB International</label>
                 </div>
-                
+
+                <div class="col-md-12 m-b-30">
+                    @*<input type="radio" class="check" id="square-radio-1" name="Sender" value="EMSB" data-radio="iradio_square-red">*@
+                    @Html.RadioButtonFor(model => model.Sender, "EMSB", new { @class = "check", @id = "square-radio-1", @name = "Sender", @data_radio = "iradio_square-blue" })
+                    <label for="square-radio-1">Send as EMSB</label>
+                </div>
+
+                @{
+                    string Now = DateTime.Now.ToString("yyMMddHHmm");
+                    int NowInt = 0;
+                    NowInt = Convert.ToInt32(Now);
+                }
+                @Html.TextBoxFor(model => model.Added, new { @Value = @NowInt, @type = "hidden" })
+
+                @Html.TextBoxFor(model => model.Updated, new { @Value = @NowInt, @type = "hidden" })
+
+
+
             </div>
         </div>
         <div class="col-md-5">
             <div class="form-group">
                 <!-- Image drop zone-->
-                <div class="col-md-12 m-b-10">
+                <div class="col-md-12 m-b-40">
                     <label for="input-file-now">Add An Image Below (optional)</label>
                     <input type="file" id="input-file-now" class="dropify" name="ImageUpload" accept="image/jpg, image/png, image/jpeg" />
                 </div>
                 <!-- drop zone ends -->
+
+                <div class="col-md-12 m-b-10">
+                    @Html.RadioButtonFor(model => model.Status, "Draft", new { @class = "check", @id = "square-radio-3", @name = "Status", @checked = "checked", @data_radio = "iradio_square-green" })
+                    <label for="square-radio-3">Save as Draft</label>
+                </div>
+                <div class="col-md-12 m-b-30">
+                    @Html.RadioButtonFor(model => model.Status, "Published", new { @class = "check", @id = "square-radio-4", @name = "Status", @data_radio = "iradio_square-red" })
+                    <label for="square-radio-4">Publish Now</label>
+                </div>
             </div>
-            
+
         </div>
         <div class="col-md-12 m-b-20 text-right">
-            <input type="submit" value="Save as Draft" class="btn btn-link waves-effect" />
-            <input type="submit" value="Publish Now" class="btn btn-danger waves-effect"/>
+            <button type="submit" class="btn btn-danger waves-effect">Submit</button>
         </div>
     </div>
-        
+
 }
 
 

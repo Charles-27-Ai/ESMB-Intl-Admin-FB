@@ -37,8 +37,12 @@ namespace ESMB_Intl_Admin_FB.Models
         [Required(ErrorMessage = "Please choose a sender")]
         public string Sender { get; set; }
 
+        [Timestamp]
         public Nullable<int> Added { get; set; }
+
+        [Timestamp]
         public Nullable<int> Updated { get; set; }
+
         public string Status { get; set; }
         public string ImgPath { get; set; }
         
