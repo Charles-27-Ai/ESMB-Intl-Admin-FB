@@ -1,0 +1,74 @@
+﻿@model ESMB_Intl_Admin_FB.Models.TrueAnnouncement
+
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = null;
+}
+
+
+@using (Html.BeginForm("AddOrEdit", "Announce", FormMethod.Post, new
+{
+    enctype = "multipart/form-data", 
+    onsubmit = "return jQueryAjaxPost(this);", 
+    data_restUrl = Url.Action("AddOrEdit", "Announce", new { id = 0 }),
+    @class = "form-material m-t-25"
+}))
+{
+    @Html.AntiForgeryToken()
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AnnoID)
+        @Html.HiddenFor(model => model.Added)
+        @Html.HiddenFor(model => model.Updated)
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.ImgPath)
+
+        <div class="form-group">
+            <div class="col-md-12 m-b-20">
+                @*<input type="text" class="form-control" placeholder="John Doe">*@
+                @Html.EditorFor(model => model.AuthorID, new { htmlAttributes = new { @class = "form-control", @placeholder = "AuthorID" }})
+                @Html.ValidationMessageFor(model => model.AuthorID, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-12 m-b-20">
+                @*<input type="text" class="form-control" placeholder="Announcement Title" required>*@
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new {@class = "form-control", @placeholder = "Announcement Title" }})
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-12 m-b-20">
+                @*<textarea class="form-control" rows="8" placeholder="Announcement Text" required></textarea>*@
+                @Html.EditorFor(model => model.Text, new { htmlAttributes = new {@class = "form-control", @rows="6", @placeholder = "Announcement Text" }})
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-12 m-b-10">
+                @*<input type="radio" class="check" id="square-radio-1" name="Sender" value="EMSB" data-radio="iradio_square-red">*@
+                @Html.RadioButtonFor(model => model.Sender, "EMSB", new { htmlAttributes = new {@class = "check", @id = "square-radio-1", @name = "Sender", @data_radio = "iradio_square-red" }})
+                <label for="square-radio-1">Send as EMSB</label>
+            </div>
+            <div class="col-md-12 m-b-30">
+                @*<input type="radio" class="check" id="square-radio-2" name="Sender" value="EMSB-Intl" checked data-radio="iradio_square-red">*@
+                @Html.RadioButtonFor(model => model.Sender, "EMSB-Intl", new { htmlAttributes = new {@class = "check", @id = "square-radio-2", @name = "Sender", @data_radio = "iradio_square-red" }})
+                <label for="square-radio-2">Send as ESMB International</label>
+            </div>
+
+            <!-- Image drop zone-->
+            <div class="col-lg-4 col-md-6 col-sm-10 m-b-10">
+                <label for="input-file-now">Add An Image Below (optional)</label>
+                <input type="file" id="input-file-now" class="dropify" name="ImageUpload" />
+            </div>
+            <!-- drop zone ends -->
+
+        </div>
+
+        <div class="modal-footer">
+            @*<input type="submit" value="Save as Draft" class="btn btn-default waves-effect" />*@
+            <button type="submit" class="btn btn-default waves-effect">Save as Draft</button>
+            <button type="submit" class="btn btn-danger waves-effect">Publish Now</button>
+            @*<input type="submit" value="Publish Now" class="btn btn-danger waves-effect" />*@
+        </div>
+}
+
+

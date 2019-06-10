@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ESMB_Intl_Admin_FB.Models.TrueAnnouncement>
+
+@{
+    ViewBag.Title = "ViewAll";
+    Layout = null;
+}
+
+<table id="demo-foo-addrow2" class="table table-bordered table-hover toggle-circle" data-page-size="7">
+    <thead>
+        <tr>
+            <th data-sort-initial="true" data-toggle="true">@Html.DisplayNameFor(model => model.Sender)</th>
+            <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.AuthorID)</th>
+            <th data-hide="all">@Html.DisplayNameFor(model => model.ImgPath)</th>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th data-hide="all">@Html.DisplayNameFor(model => model.Text)</th>
+            <th data-hide="phone">@Html.DisplayNameFor(model => model.Added)</th>
+            <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Updated)</th>
+            <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Status)</th>
+            <th data-sort-ignore="true" class="min-width">Actions</th>
+        </tr>
+    </thead>
+    <div class="m-t-40">
+        <div class="d-flex">
+            <div class="mr-auto">
+                <div>
+                    Reserved place for choosing No. of rows to display.
+                </div>
+            </div>
+            <div class="ml-auto">
+                <div class="form-group">
+                    <input id="demo-input-search2" type="text" placeholder="Search" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </div>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Sender)</td>
+            <td>@Html.DisplayFor(modelItem => item.AuthorID)</td>
+            <td><a href="@Html.DisplayFor(modelItem => item.ImgPath)" class="btn btn-link">View Image</a></td>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.Text)</td>
+            <td>@Html.DisplayFor(modelItem => item.Added)</td>
+            <td>@Html.DisplayFor(modelItem => item.Updated)</td>
+            <td><span class="label label-table label-success">
+                @Html.DisplayFor(modelItem => item.Status)
+            </span> </td>
+            <td>
+                @*<button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>*@
+                <a class="btn btn-primary btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Announce", new {id = @item.AnnoID})')"><i class="ti-pencil"></i></a>
+                <a class="btn btn-danger btn-sm" onclick="Delete('@Url.Action("Delete", "Announce", new {id = @item.AnnoID})')"><i class="ti-trash"></i></a>
+            </td>
+        </tr>
+    }
+    
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6">
+                <div class="text-right">
+                    <ul class="pagination"></ul>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+

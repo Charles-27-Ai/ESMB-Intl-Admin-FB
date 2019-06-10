@@ -16,7 +16,7 @@ namespace ESMB_Intl_Admin_FB
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Announce", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
