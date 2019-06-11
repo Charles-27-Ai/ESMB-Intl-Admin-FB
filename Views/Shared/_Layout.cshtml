@@ -79,56 +79,57 @@
     <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
 
 
     <script src="~/Scripts/Site.js"></script>
 
     <!-- jQuery file upload -->
     <script src="~/App_Assets/plugins/dropify/dist/js/dropify.min.js"></script>
-<script>
+    <script>
 
-    $(function() {
+        $(function () {
 
-        // Basic
-        $(".dropify").dropify();
+            // Basic
+            $(".dropify").dropify();
 
-        // Translated
-        $(".dropify-fr").dropify({
-            messages: {
-                default: "Glissez-déposez un fichier ici ou cliquez",
-                replace: "Glissez-déposez un fichier ou cliquez pour remplacer",
-                remove: "Supprimer",
-                error: "Désolé, le fichier trop volumineux"
-            }
+            // Translated
+            $(".dropify-fr").dropify({
+                messages: {
+                    default: "Glissez-déposez un fichier ici ou cliquez",
+                    replace: "Glissez-déposez un fichier ou cliquez pour remplacer",
+                    remove: "Supprimer",
+                    error: "Désolé, le fichier trop volumineux"
+                }
+            });
+
+            // Used events
+            var drEvent = $("#input-file-events").dropify();
+
+            drEvent.on("dropify.beforeClear", function (event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+
+            drEvent.on("dropify.afterClear", function (event, element) {
+                alert("File deleted");
+            });
+
+            drEvent.on("dropify.errors", function (event, element) {
+                console.log("Has Errors");
+            });
+
+            var drDestroy = $("#input-file-to-destroy").dropify();
+            drDestroy = drDestroy.data("dropify")
+            $("#toggleDropify").on("click", function (e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
         });
-
-        // Used events
-        var drEvent = $("#input-file-events").dropify();
-
-        drEvent.on("dropify.beforeClear", function(event, element) {
-            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-        });
-
-        drEvent.on("dropify.afterClear", function(event, element) {
-            alert("File deleted");
-        });
-
-        drEvent.on("dropify.errors", function(event, element) {
-            console.log("Has Errors");
-        });
-
-        var drDestroy = $("#input-file-to-destroy").dropify();
-        drDestroy = drDestroy.data("dropify")
-        $("#toggleDropify").on("click", function(e) {
-            e.preventDefault();
-            if (drDestroy.isDropified()) {
-                drDestroy.destroy();
-            } else {
-                drDestroy.init();
-            }
-        })
-    });
-</script>
+    </script>
 
 </body>
 </html>

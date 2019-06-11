@@ -50,23 +50,49 @@ namespace ESMB_Intl_Admin_FB.Controllers
 
         public ActionResult AddOrEdit(TrueAnnouncement anno)
         {
-            if (anno.ImageUpload != null)
+            try
             {
-                string fileName = Path.GetFileNameWithoutExtension(anno.ImageUpload.FileName);
-                string extension = Path.GetExtension(anno.ImageUpload.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;  //确保每个图片文件名唯一，避免上传相同文件
-                anno.ImgPath = "~/App_Files/Images/" + fileName;
-                anno.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/App_Files/Images/"), fileName));
+                if (anno.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(anno.ImageUpload.FileName);
+                    string extension = Path.GetExtension(anno.ImageUpload.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;  //确保每个图片文件名唯一，避免上传相同文件
+                    anno.ImgPath = "~/App_Files/Images/" + fileName;
+                    anno.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/App_Files/Images/"), fileName));
+                }
+
+                using (DBModel db = new DBModel())
+                {
+                    if (anno.AnnoID == 0)
+                    {
+                        db.TrueAnnouncements.Add(anno);
+                        db.SaveChanges(); 
+                    }
+                    else
+                    {
+                        db.Entry(anno).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
+                }
+
+                //return RedirectToAction("ViewAll");
+                return Json(new
+                {
+                    success = true,
+                    html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllAnnouncements()),
+                    message = "Submitted Successfully"
+                }, JsonRequestBehavior.AllowGet);
             }
-            
-            using (DBModel db = new DBModel())
+            catch (Exception ex)
             {
-                db.TrueAnnouncements.Add(anno);
-                db.SaveChanges();
-                
+
+                return Json(new
+                {
+                    success = false,
+                    message = ex.Message
+                }, JsonRequestBehavior.AllowGet);
             }
-            
-            return RedirectToAction("ViewAll");
         }
 
         
