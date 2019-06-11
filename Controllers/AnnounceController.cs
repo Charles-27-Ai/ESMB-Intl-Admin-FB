@@ -34,14 +34,14 @@ namespace ESMB_Intl_Admin_FB.Controllers
 
         public ActionResult AddOrEdit(int id = 0)
         {
-            TrueAnnouncement anno = new TrueAnnouncement();
-            //if (id != 0)
-            //{
-            //    using (DBModel db = new DBModel())
-            //    {
-            //        anno = db.TrueAnnouncements.Where(x => x.AnnoID == id).FirstOrDefault<TrueAnnouncement>();
-            //    }
-            //}
+            var anno = new TrueAnnouncement();
+            if (id != 0)
+            {
+                using (DBModel db = new DBModel())
+                {
+                    anno = db.TrueAnnouncements.Where(x => x.AnnoID == id).FirstOrDefault<TrueAnnouncement>();
+                }
+            }
 
             return View(anno);
         }
@@ -87,6 +87,33 @@ namespace ESMB_Intl_Admin_FB.Controllers
             catch (Exception ex)
             {
 
+                return Json(new
+                {
+                    success = false,
+                    message = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                using (DBModel db = new DBModel())
+                {
+                    TrueAnnouncement anno = db.TrueAnnouncements.Where(x => x.AnnoID == id).FirstOrDefault<TrueAnnouncement>();
+                    db.TrueAnnouncements.Remove(anno);
+                    db.SaveChanges();
+                }
+                return Json(new
+                {
+                    success = true,
+                    html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllAnnouncements()),
+                    message = "Delete Successfully"
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
                 return Json(new
                 {
                     success = false,

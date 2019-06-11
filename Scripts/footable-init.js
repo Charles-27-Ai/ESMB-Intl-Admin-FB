@@ -1,12 +1,12 @@
 
 $(window).on('load', function() {
 
-    //$('demo-foo-addrow2').footable({ 
-    //    calculateWidthOverride: function() {
-    //        return {width: $(window).width()};
-    //    }, 
-    //    breakpoints: { phone: 992, tablet: 2048}
-    //});
+	//$('demo-foo-addrow2').footable({ 
+	//    calculateWidthOverride: function() {
+	//        return {width: $(window).width()};
+	//    }, 
+	//    breakpoints: { phone: 992, tablet: 2048}
+	//});
 
 	// Row Toggler
 	// -----------------------------------------------------------------
@@ -61,7 +61,7 @@ $(window).on('load', function() {
 		addrow.trigger('footable_filter', {filter: $(this).val()});
 	});
 	
-	// Add & Remove Row
+	//Add & Remove Row
 	var addrow = $('#demo-foo-addrow');
 	addrow.footable().on('click', '.delete-row-btn', function() {
 
@@ -74,7 +74,8 @@ $(window).on('load', function() {
 		//delete the row
 		footable.removeRow(row);
 	});
-    var addrow = $('#demo-foo-addrow2');
+	
+	var addrow = $('#demo-foo-addrow2');
 	addrow.footable().on('click', '.delete-row-btn', function() {
 
 		//get the footable object
@@ -86,16 +87,5 @@ $(window).on('load', function() {
 		//delete the row
 		footable.removeRow(row);
 	});
-	//// Add Row Button
-	//$('#demo-btn-addrow').click(function() {
 
-	//	//get the footable object
-	//	var footable = addrow.data('footable');
-		
-	//	//build up the row we are wanting to add
-	//	var newRow = '<tr><td>thome</td><td>Woldt</td><td>Airline Transport Pilot</td><td>3 Oct 2016</td><td><span class="label label-table label-success">Active</span></td><td><button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></td></tr>';
-
-	//	//add it
-	//	footable.appendRow(newRow);
-	//});
 });

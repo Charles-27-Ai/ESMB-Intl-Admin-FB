@@ -1,18 +1,4 @@
-﻿// Notification
-//function successNote() {
-//    $.toast({
-//        heading: "Your announcement has been saved",
-//        text: "It should appear at the top of the ViewAll table.",
-//        position: "top-right",
-//        loaderBg:"#ff6849",
-//        icon: "success",
-//        hideAfter: 3500, 
-//        stack: 6
-//    });
-//}
-
-
-// Ajax form validation and Post request
+﻿// Ajax form validation and Post request
 function jQueryAjaxPost(form) {  // reach to AnnounceController 里的 HttpPost 下的 method
     $.validator.unobtrusive.parse(form);
     if ($(form).valid()) {
@@ -67,4 +53,39 @@ function refreshAddNewTab(resetUrl, showViewTab) {
 
         }
     });
+}
+
+function Edit(url) {
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function(response) {
+            $("#newAnnoTab").html(response);
+            $("ul.nav.nav-tabs a:eq(1)").html("Edit");  // Change the name of tab
+            $("ul.nav.nav-tabs a:eq(1)").tab("show");
+        }
+    });
+}
+
+function Delete(url) {
+    if (confirm("Are you sure to delete this record?") == true) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            success: function(response) {
+                if (response.success) {
+                    window.location.reload();
+                    window.onload = function() {
+                        $("#allViewTab").html(response.html);
+                    }
+                    //$.notify(response.message, "warn");
+                    // call activateJqueryTable func while refreshing the table after deletion
+                    if (typeof activateJqueryTable !== "undefined" && $.isFunction(activateJqueryTable))
+                        activateJqueryTable();
+                } else {
+                    $.notify(response.message, "error");
+                }
+            }
+        });
+    }
 }
