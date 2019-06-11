@@ -203,20 +203,20 @@
 
                         <ul class="nav nav-tabs profile-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#all" role="tab">View All</a>
+                                <a class="nav-link active" data-toggle="tab" href="#allViewTab" role="tab">View All</a>
                             </li>
-                            <li>
-                                <a class="nav-link" data-toggle="tab" href="#new" role="tab">Add New</a>
+                            <li class="nav-item">
+                               <a class="nav-link" data-toggle="tab" href="#newAnnoTab" role="tab">Add New</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
-                            <div id="all" class="tab-pane active" role="tabpanel">
+                            <div id="allViewTab" class="tab-pane active" role="tabpanel">
                                 <!-- All Announcements Tab-->
                                 @Html.Action("ViewAll")
                             </div>
 
-                            <div id="new" class="tab-pane fade in p-t-20" role="tabpanel">
+                            <div id="newAnnoTab" class="tab-pane fade in p-t-20" role="tabpanel">
                                 <!-- Edit & Add -->
                                 @Html.Action("AddOrEdit")
 
@@ -295,7 +295,7 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer">
-        © 2019 Admin Press Admin by themedesigner.in
+        © 2019 English Montreal School Board
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->

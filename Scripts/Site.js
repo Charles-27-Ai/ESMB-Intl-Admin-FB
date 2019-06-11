@@ -8,7 +8,9 @@ function jQueryAjaxPost(form) {  // reach to AnnounceController 里的 HttpPost 
             url: form.action,
             data: new FormData(form),
             success: function(response) {
-                $("#all").html(response);
+                $("#allViewTab").html(response);
+                refreshAddNewTab($(form).attr("data-restUrl"), true);
+                
                 //if (response.success) {
                 //    $("#firstTab").html(response.html);
                 //    refreshAddNewTab($(form).attr("data-restUrl"), true);
@@ -33,3 +35,22 @@ function jQueryAjaxPost(form) {  // reach to AnnounceController 里的 HttpPost 
     return false;
 }
 
+
+function refreshAddNewTab(resetUrl, showViewTab) {
+    $.ajax({
+        type: "GET",
+        url: resetUrl,
+        success: function(response) {
+            $("#newAnnoTab").html(response);
+            $("ul.nav.nav-tabs a:eq(1)").html("Add New");
+            if (showViewTab) {
+                window.location.reload();
+                window.onload = function() {
+                    $("ul.nav.nav-tabs a:eq(0)").tab("show");
+
+                }
+            }
+
+        }
+    });
+}

@@ -34,7 +34,6 @@ namespace ESMB_Intl_Admin_FB.Models
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
 
-        [Required(ErrorMessage = "Please choose a sender")]
         public string Sender { get; set; }
 
         [Timestamp]
