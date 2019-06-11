@@ -68,7 +68,15 @@ function Edit(url) {
 }
 
 function Delete(url) {
-    if (confirm("Are you sure to delete this record?") == true) {
+    swal({   
+        title: "Are you sure?",   
+        text: "You will not be able to recover this announcement    ",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Yes, delete it!",   
+        closeOnConfirm: false 
+    }, function(){  
         $.ajax({
             type: "POST",
             url: url,
@@ -77,9 +85,11 @@ function Delete(url) {
                     window.location.reload();
                     window.onload = function() {
                         $("#allViewTab").html(response.html);
+                        swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
                     }
                     //$.notify(response.message, "warn");
                     // call activateJqueryTable func while refreshing the table after deletion
+                    //this.swal()
                     if (typeof activateJqueryTable !== "undefined" && $.isFunction(activateJqueryTable))
                         activateJqueryTable();
                 } else {
@@ -87,5 +97,14 @@ function Delete(url) {
                 }
             }
         });
-    }
+    });
 }
+
+
+
+
+
+
+
+
+

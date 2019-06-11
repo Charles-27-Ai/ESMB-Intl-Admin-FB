@@ -6,26 +6,31 @@
 }
 
 
-<table id="demo-foo-addrow2" class="table table-bordered table-hover toggle-circle" data-page-size="7">
+<table id="demo-foo-addrow2" class="table table-bordered table-hover toggle-circle" data-page-size="10">
     <thead>
         <tr>
-            <th data-toggle="true">@Html.DisplayNameFor(model => model.Sender)</th>
+            <th data-toggle="true" class="min-width">@Html.DisplayNameFor(model => model.Sender)</th>
             <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.AuthorID)</th>
             <th data-hide="all">@Html.DisplayNameFor(model => model.ImgPath)</th>
             <th>@Html.DisplayNameFor(model => model.Title)</th>
             <th data-hide="all">@Html.DisplayNameFor(model => model.Text)</th>
             <th data-sort-initial="true" data-hide="phone">@Html.DisplayNameFor(model => model.Added)</th>
             <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Updated)</th>
-            <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Status)</th>
+            <th data-hide="phone">@Html.DisplayNameFor(model => model.Status)</th>
             <th data-sort-ignore="true" class="min-width">Actions</th>
         </tr>
     </thead>
     <div class="m-t-40">
         <div class="d-flex">
             <div class="mr-auto">
-                <div>
-                    Reserved place to display how many rows to show on each page
-                </div>
+                <label class="form-inline">Show &nbsp;
+                    <select id="demo-show-entries">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                    &nbsp; entries 
+                </label>
             </div>
             <div class="ml-auto">
                 <div class="form-group">
@@ -45,9 +50,17 @@
             <td>@Html.DisplayFor(modelItem => item.Text)</td>
             <td>@Html.DisplayFor(modelItem => item.Added)</td>
             <td>@Html.DisplayFor(modelItem => item.Updated)</td>
-            <td><span class="label label-table label-success">
-                @Html.DisplayFor(modelItem => item.Status)
-            </span> </td>
+            <td>
+                @{
+                    if (@item.Status == "Published")
+                    {
+                        <span class="label label-table label-success">Published</span>
+                    } else if (@item.Status == "Drafted")
+                    {
+                        <span class="label label-table label-warning">Drafted</span>
+                    }
+                }
+            </td>
             <td>
                 @*<button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>*@
                 <a role="button" class="btn btn-link btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Announce", new { id = @item.AnnoID})')"><i class="ti-pencil"></i></a>

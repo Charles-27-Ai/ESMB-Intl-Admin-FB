@@ -23,7 +23,7 @@
     });
 
     //Warning Message
-    $('#sa-warning').click(function(){
+    $("#sa-warning").click(function(){
         swal({   
             title: "Are you sure?",   
             text: "You will not be able to recover this imaginary file!",   

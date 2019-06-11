@@ -23,12 +23,12 @@ $(window).on('load', function() {
 
 	// Pagination
 	// -----------------------------------------------------------------
-	$('#demo-foo-pagination').footable();
+    $('#demo-foo-addrow2').footable();
 	$('#demo-show-entries').change(function (e) {
 		e.preventDefault();
 		var pageSize = $(this).val();
-		$('#demo-foo-pagination').data('page-size', pageSize);
-		$('#demo-foo-pagination').trigger('footable_initialized');
+		$('#demo-foo-addrow2').data('page-size', pageSize);
+		$('#demo-foo-addrow2').trigger('footable_initialized');
 	});
 
 	// Filtering
@@ -53,39 +53,43 @@ $(window).on('load', function() {
 	});
 
 
-	
 
 	// Search input
+    var addrow = $('#demo-foo-addrow2');
+
 	$('#demo-input-search2').on('input', function (e) {
 		e.preventDefault();
 		addrow.trigger('footable_filter', {filter: $(this).val()});
 	});
 	
-	//Add & Remove Row
-	var addrow = $('#demo-foo-addrow');
-	addrow.footable().on('click', '.delete-row-btn', function() {
 
-		//get the footable object
-		var footable = addrow.data('footable');
 
-		//get the row we are wanting to delete
-		var row = $(this).parents('tr:first');
 
-		//delete the row
-		footable.removeRow(row);
-	});
+	////Add & Remove Row
+	//var addrow = $('#demo-foo-addrow');
+	//addrow.footable().on('click', '.delete-row-btn', function() {
+
+	//	//get the footable object
+	//	var footable = addrow.data('footable');
+
+	//	//get the row we are wanting to delete
+	//	var row = $(this).parents('tr:first');
+
+	//	//delete the row
+	//	footable.removeRow(row);
+	//});
 	
-	var addrow = $('#demo-foo-addrow2');
-	addrow.footable().on('click', '.delete-row-btn', function() {
+	
+	//addrow.footable().on('click', '.delete-row-btn', function() {
 
-		//get the footable object
-		var footable = addrow.data('footable');
+	//	//get the footable object
+	//	var footable = addrow.data('footable');
 
-		//get the row we are wanting to delete
-		var row = $(this).parents('tr:first');
+	//	//get the row we are wanting to delete
+	//	var row = $(this).parents('tr:first');
 
-		//delete the row
-		footable.removeRow(row);
-	});
+	//	//delete the row
+	//	footable.removeRow(row);
+	//});
 
 });
