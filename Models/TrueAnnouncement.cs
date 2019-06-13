@@ -37,6 +37,7 @@ namespace ESMB_Intl_Admin_FB.Models
         public string Sender { get; set; }
 
         [Timestamp]
+        [DisplayName("Date & Time")]
         public Nullable<int> Added { get; set; }
 
         [Timestamp]

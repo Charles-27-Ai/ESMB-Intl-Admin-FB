@@ -40,13 +40,11 @@
                 </div>
 
                 <div class="col-md-12 m-b-10">
-                    @*<input type="radio" class="check" id="square-radio-2" name="Sender" value="EMSB-Intl" checked data-radio="iradio_square-red">*@
                     @Html.RadioButtonFor(model => model.Sender, "EMSB-Intl", new { @class = "check", @id = "square-radio-2", @name = "Sender", @checked = "checked", @data_radio = "iradio_square-blue" })
                     <label for="square-radio-2">Send as ESMB International</label>
                 </div>
 
                 <div class="col-md-12 m-b-30">
-                    @*<input type="radio" class="check" id="square-radio-1" name="Sender" value="EMSB" data-radio="iradio_square-red">*@
                     @Html.RadioButtonFor(model => model.Sender, "EMSB", new { @class = "check", @id = "square-radio-1", @name = "Sender", @data_radio = "iradio_square-blue" })
                     <label for="square-radio-1">Send as EMSB</label>
                 </div>
@@ -85,7 +83,10 @@
 
         </div>
         <div class="col-md-12 m-b-20 text-right">
-            <button type="submit" class="btn btn-danger waves-effect">Submit</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger waves-effect">Submit</button>
+                
+            </div>
         </div>
     </div>
 

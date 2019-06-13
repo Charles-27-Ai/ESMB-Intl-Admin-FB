@@ -44,16 +44,32 @@ function refreshAddNewTab(resetUrl, showViewTab) {
             $("#newAnnoTab").html(response);
             $("ul.nav.nav-tabs a:eq(1)").html("Add New");
             if (showViewTab) {
+                //$("ul.nav.nav-tabs a:eq(0)").tab("show");
                 window.location.reload();
-                window.onload = function() {
-                    $("ul.nav.nav-tabs a:eq(0)").tab("show");
-                    
-                }
-            }
+                $("ul.nav.nav-tabs a:eq(0)").tab("show");
 
+                //window.onload = function () {
+                //    $("ul.nav.nav-tabs a:eq(0)").tab("show");
+
+                //}
+            }
         }
     });
 }
+
+
+//function turnEditToAddTab(resetUrl) {
+//    $.ajax({
+//        type: "GET",
+//        url: resetUrl,
+//        success: function(response) {
+//            $("#newAnnoTab").html(response);
+//            $("ul.nav.nav-tabs a:eq(1)").html("Add New");
+//            $("ul.nav.nav-tabs a:eq(1)").tab("show");
+
+//        }
+//    });
+//}
 
 function Edit(url) {
     $.ajax({
@@ -68,15 +84,16 @@ function Edit(url) {
 }
 
 function Delete(url) {
-    swal({   
-        title: "Are you sure?",   
-        text: "You will not be able to recover this announcement    ",   
-        type: "warning",   
-        showCancelButton: true,   
-        confirmButtonColor: "#DD6B55",   
-        confirmButtonText: "Yes, delete it!",   
-        closeOnConfirm: false 
-    }, function(){  
+    swal({
+            title: "Are you sure to delete?",
+            text: "You will not be able to recover this announcement    ",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+    },
+    function() {
         $.ajax({
             type: "POST",
             url: url,
@@ -85,11 +102,9 @@ function Delete(url) {
                     window.location.reload();
                     window.onload = function() {
                         $("#allViewTab").html(response.html);
-                        swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
                     }
                     //$.notify(response.message, "warn");
-                    // call activateJqueryTable func while refreshing the table after deletion
-                    //this.swal()
+                    //这里我实在是不懂如何在 确定后再执行这些 ajax 语句
                     if (typeof activateJqueryTable !== "undefined" && $.isFunction(activateJqueryTable))
                         activateJqueryTable();
                 } else {
@@ -97,7 +112,24 @@ function Delete(url) {
                 }
             }
         });
+
     });
+}
+
+function Publish() {
+    swal({
+            title: "Are you sure to publish?",
+            text: "You will not be able to recover this announcement    ",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, publish it!",
+            closeOnConfirm: false
+        },
+        function() {
+            swal("Published!", "Your announcement can be viewed by everyone!", "success");
+
+        });
 }
 
 

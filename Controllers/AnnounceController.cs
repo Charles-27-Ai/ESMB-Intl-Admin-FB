@@ -31,7 +31,7 @@ namespace ESMB_Intl_Admin_FB.Controllers
                 return db.TrueAnnouncements.ToList<TrueAnnouncement>();
             }
         }
-
+        
         public ActionResult AddOrEdit(int id = 0)
         {
             var anno = new TrueAnnouncement();
