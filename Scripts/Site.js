@@ -57,20 +57,6 @@ function refreshAddNewTab(resetUrl, showViewTab) {
     });
 }
 
-
-//function turnEditToAddTab(resetUrl) {
-//    $.ajax({
-//        type: "GET",
-//        url: resetUrl,
-//        success: function(response) {
-//            $("#newAnnoTab").html(response);
-//            $("ul.nav.nav-tabs a:eq(1)").html("Add New");
-//            $("ul.nav.nav-tabs a:eq(1)").tab("show");
-
-//        }
-//    });
-//}
-
 function Edit(url) {
     $.ajax({
         type: "GET",

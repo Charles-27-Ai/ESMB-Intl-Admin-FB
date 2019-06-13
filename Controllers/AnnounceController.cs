@@ -26,18 +26,27 @@ namespace ESMB_Intl_Admin_FB.Controllers
 
         IEnumerable<TrueAnnouncement> GetAllAnnouncements()
         {
-            using (DBModel db = new DBModel())
+            using (var db = new TrueDBModel())
             {
-                return db.TrueAnnouncements.ToList<TrueAnnouncement>();
+                //return db.TrueAnnouncements.Include().ToList();
+                return db.TrueAnnouncements.Include(a => a.Author).ToList();
             }
         }
+
+        //IEnumerable<Author> GetAllAuthors()
+        //{
+        //    using (var db = new TrueDBModel())
+        //    {
+        //        return db.Authors.ToList();
+        //    }
+        //}
         
         public ActionResult AddOrEdit(int id = 0)
         {
             var anno = new TrueAnnouncement();
             if (id != 0)
             {
-                using (DBModel db = new DBModel())
+                using (TrueDBModel db = new TrueDBModel())
                 {
                     anno = db.TrueAnnouncements.Where(x => x.AnnoID == id).FirstOrDefault<TrueAnnouncement>();
                 }
@@ -61,7 +70,7 @@ namespace ESMB_Intl_Admin_FB.Controllers
                     anno.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/App_Files/Images/"), fileName));
                 }
 
-                using (DBModel db = new DBModel())
+                using (TrueDBModel db = new TrueDBModel())
                 {
                     if (anno.AnnoID == 0)
                     {
@@ -99,7 +108,7 @@ namespace ESMB_Intl_Admin_FB.Controllers
         {
             try
             {
-                using (DBModel db = new DBModel())
+                using (TrueDBModel db = new TrueDBModel())
                 {
                     TrueAnnouncement anno = db.TrueAnnouncements.Where(x => x.AnnoID == id).FirstOrDefault<TrueAnnouncement>();
                     db.TrueAnnouncements.Remove(anno);

@@ -26,6 +26,7 @@ namespace ESMB_Intl_Admin_FB.Models
         [Required(ErrorMessage = "This field is required")]
         [DisplayName("Author")]
         public Nullable<int> AuthorID { get; set; }
+        public Author Author { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
         public string Title { get; set; }

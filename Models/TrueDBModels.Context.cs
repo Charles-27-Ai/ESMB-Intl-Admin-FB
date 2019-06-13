@@ -13,10 +13,10 @@ namespace ESMB_Intl_Admin_FB.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBModel : DbContext
+    public partial class TrueDBModel : DbContext
     {
-        public DBModel()
-            : base("name=DBModel")
+        public TrueDBModel()
+            : base("name=TrueDBModel")
         {
         }
     
@@ -25,6 +25,7 @@ namespace ESMB_Intl_Admin_FB.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<TrueAnnouncement> TrueAnnouncements { get; set; }
     }
 }

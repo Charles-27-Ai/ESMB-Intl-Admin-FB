@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TrueEMSBAdminDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="AuthorID" />
+          </Key>
+          <Property Name="AuthorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthorCode" Type="nvarchar" MaxLength="150" />
+          <Property Name="AuthorFLName" Type="nvarchar" MaxLength="150" />
+          <Property Name="AuthorLevel" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TrueAnnouncements">
+          <Key>
+            <PropertyRef Name="AnnoID" />
+          </Key>
+          <Property Name="AnnoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthorID" Type="int" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Text" Type="varchar(max)" />
+          <Property Name="Sender" Type="varchar" MaxLength="50" />
+          <Property Name="Added" Type="int" />
+          <Property Name="Updated" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="ImgPath" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_TrueAnnouncements_Authors">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="0..1" />
+          <End Role="TrueAnnouncements" Type="Self.TrueAnnouncements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="AuthorID" />
+            </Principal>
+            <Dependent Role="TrueAnnouncements">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrueEMSBAdminDBModelStoreContainer">
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrueAnnouncements" EntityType="Self.TrueAnnouncements" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TrueAnnouncements_Authors" Association="Self.FK_TrueAnnouncements_Authors">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="TrueAnnouncements" EntitySet="TrueAnnouncements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TrueEMSBAdminDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="AuthorID" />
+          </Key>
+          <Property Name="AuthorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorCode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorFLName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorLevel" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="TrueAnnouncements" Relationship="Self.FK_TrueAnnouncements_Authors" FromRole="Authors" ToRole="TrueAnnouncements" />
+        </EntityType>
+        <EntityType Name="TrueAnnouncement">
+          <Key>
+            <PropertyRef Name="AnnoID" />
+          </Key>
+          <Property Name="AnnoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorID" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Sender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Added" Type="Int32" />
+          <Property Name="Updated" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImgPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Author" Relationship="Self.FK_TrueAnnouncements_Authors" FromRole="TrueAnnouncements" ToRole="Authors" />
+        </EntityType>
+        <Association Name="FK_TrueAnnouncements_Authors">
+          <End Role="Authors" Type="Self.Author" Multiplicity="0..1" />
+          <End Role="TrueAnnouncements" Type="Self.TrueAnnouncement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="AuthorID" />
+            </Principal>
+            <Dependent Role="TrueAnnouncements">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrueDBModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authors" EntityType="Self.Author" />
+          <EntitySet Name="TrueAnnouncements" EntityType="Self.TrueAnnouncement" />
+          <AssociationSet Name="FK_TrueAnnouncements_Authors" Association="Self.FK_TrueAnnouncements_Authors">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="TrueAnnouncements" EntitySet="TrueAnnouncements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TrueEMSBAdminDBModelStoreContainer" CdmEntityContainer="TrueDBModel">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="TrueEMSBAdminDBModel.Author">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="AuthorCode" ColumnName="AuthorCode" />
+                <ScalarProperty Name="AuthorFLName" ColumnName="AuthorFLName" />
+                <ScalarProperty Name="AuthorLevel" ColumnName="AuthorLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrueAnnouncements">
+            <EntityTypeMapping TypeName="TrueEMSBAdminDBModel.TrueAnnouncement">
+              <MappingFragment StoreEntitySet="TrueAnnouncements">
+                <ScalarProperty Name="AnnoID" ColumnName="AnnoID" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="Added" ColumnName="Added" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

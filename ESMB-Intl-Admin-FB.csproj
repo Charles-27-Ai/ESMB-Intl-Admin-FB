@@ -134,23 +134,26 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalClass.cs" />
-    <Compile Include="Models\DBModels.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.edmx</DependentUpon>
+    <Compile Include="Models\Author.cs">
+      <DependentUpon>TrueDBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TrueAnnouncement.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>TrueDBModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrueDBModels.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrueDBModels.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrueDBModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrueDBModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrueDBModels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrueDBModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -3194,15 +3197,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DBModels.Context.tt">
+    <Content Include="Models\TrueDBModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBModels.Context.cs</LastGenOutput>
-      <DependentUpon>DBModels.edmx</DependentUpon>
+      <DependentUpon>TrueDBModels.edmx</DependentUpon>
+      <LastGenOutput>TrueDBModels.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DBModels.tt">
+    <Content Include="Models\TrueDBModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModels.edmx</DependentUpon>
-      <LastGenOutput>DBModels.cs</LastGenOutput>
+      <DependentUpon>TrueDBModels.edmx</DependentUpon>
+      <LastGenOutput>TrueDBModels.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -3985,12 +3988,12 @@
     <Content Include="App_Assets\icons\weather-icons\sass\weather-icons-wind.scss" />
     <Content Include="App_Assets\icons\weather-icons\sass\weather-icons.min.scss" />
     <Content Include="App_Assets\icons\weather-icons\sass\weather-icons.scss" />
-    <EntityDeploy Include="Models\DBModels.edmx">
+    <EntityDeploy Include="Models\TrueDBModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModels.Designer.cs</LastGenOutput>
+      <LastGenOutput>TrueDBModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DBModels.edmx.diagram">
-      <DependentUpon>DBModels.edmx</DependentUpon>
+    <Content Include="Models\TrueDBModels.edmx.diagram">
+      <DependentUpon>TrueDBModels.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\custom.min.js" />
