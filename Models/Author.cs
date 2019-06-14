@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 namespace ESMB_Intl_Admin_FB.Models
 {
     using System;
@@ -21,8 +24,14 @@ namespace ESMB_Intl_Admin_FB.Models
         }
     
         public int AuthorID { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
         public string AuthorCode { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
+        [DisplayName("Name")]
         public string AuthorFLName { get; set; }
+
         public string AuthorLevel { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

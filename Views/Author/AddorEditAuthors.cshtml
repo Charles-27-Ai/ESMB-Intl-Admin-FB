@@ -8,7 +8,7 @@
 @using (Html.BeginForm("AddorEditAuthors", "Author", FormMethod.Post, new
 {
     enctype = "multipart/form-data",
-    //onsubmit = "return jQueryAjaxPost(this);",
+    onsubmit = "return jQueryAjaxPostAuthor(this);",
     data_restUrl = Url.Action("AddorEditAuthors", "Author", new { id = 0 }),
     @class = "form-material m-t-25"
 }))

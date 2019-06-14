@@ -47,8 +47,8 @@
                     <td>@Html.DisplayFor(modelItem => item.AuthorFLName)</td>
                     <td>@Html.DisplayFor(modelItem => item.AuthorLevel)</td>
                     <td>
-                        <a class="btn btn-link btn-sm" onclick=""><i class="ti-pencil"></i></a>
-                        <a class="btn btn-link btn-sm" onclick=""><i class="ti-trash"></i></a>
+                        <a class="btn btn-link btn-sm" onclick="EditAuthor('@Url.Action("AddorEditAuthors", "Author", new { id = @item.AuthorID})')"><i class="ti-pencil"></i></a>
+                        <a class="btn btn-link btn-sm" onclick="DeleteAuthor('@Url.Action("DeleteAuthor", "Author", new { id = @item.AuthorID})')"><i class="ti-trash"></i></a>
                     </td>
                 </tr>
             }

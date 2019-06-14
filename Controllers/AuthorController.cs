@@ -47,7 +47,66 @@ namespace ESMB_Intl_Admin_FB.Controllers
         [HttpPost]
         public ActionResult AddorEditAuthors(Author author)
         {
-            return RedirectToAction("ViewAllAuthors");
+            try
+            {
+                using (var db = new TrueDBModel())
+                {
+                    if (author.AuthorID == 0)
+                    {
+                        db.Authors.Add(author);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.Entry(author).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+
+                //return RedirectToAction("ViewAllAuthors");
+                return Json(new
+                {
+                    success = true,
+                    html = GlobalClass.RenderRazorViewToString(this, "ViewAllAuthors", GetAllAuthors()),
+                    message = "Submitted Successfully"
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult DeleteAuthor(int id)
+        {
+            try
+            {
+                using (var db = new TrueDBModel())
+                {
+                    var author = db.Authors.Where(x => x.AuthorID == id).FirstOrDefault<Author>();
+                    db.Authors.Remove(author);
+                    db.SaveChanges();
+                }
+
+                return Json(new
+                {
+                    success = true,
+                    html = GlobalClass.RenderRazorViewToString(this, "ViewAllAuthors", GetAllAuthors()),
+                    message = "Delete Successfully"
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
