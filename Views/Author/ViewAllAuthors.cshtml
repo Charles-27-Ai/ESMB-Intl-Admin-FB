@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ESMB_Intl_Admin_FB.Models.Author>
+
+@{
+    ViewBag.Title = "ViewAllAuthors";
+    Layout = null;
+}
+
+    <table id="author-table" class="table table-bordered table-hover toggle-circle" data-page-size="5">
+        <thead>
+        <tr>
+            <th data-toggle="true" class="min-width">@Html.DisplayNameFor(model => model.AuthorID)</th>
+            <th>@Html.DisplayNameFor(model => model.AuthorCode)</th>
+            <th>@Html.DisplayNameFor(model => model.AuthorFLName)</th>
+            <th>@Html.DisplayNameFor(model => model.AuthorLevel)</th>
+            <th data-sort-ignore="true" class="min-width">Actions</th>
+        </tr>
+        </thead>
+
+        <!-- Control bar -->
+        <div class="m-t-40">
+            <div class="d-flex">
+                <div class="mr-auto">
+                    <label class="form-inline">
+                        Show &nbsp;
+                        <select id="author-show-entries">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                        </select>
+                        &nbsp; entries
+                    </label>
+                </div>
+                <div class="ml-auto">
+                    <div class="form-group">
+                        <input id="author-search" type="text" placeholder="Search" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.AuthorID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AuthorCode)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AuthorFLName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AuthorLevel)</td>
+                    <td>
+                        <a class="btn btn-link btn-sm" onclick=""><i class="ti-pencil"></i></a>
+                        <a class="btn btn-link btn-sm" onclick=""><i class="ti-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6">
+                    <div class="text-right">
+                        <ul class="pagination"></ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>

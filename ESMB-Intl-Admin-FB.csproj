@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AnnounceController.cs" />
+    <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4031,6 +4032,9 @@
     <Content Include="Views\Announce\Index.cshtml" />
     <Content Include="Views\Announce\ViewAll.cshtml" />
     <Content Include="Views\Announce\AddOrEdit.cshtml" />
+    <Content Include="Views\Author\Author.cshtml" />
+    <Content Include="Views\Author\ViewAllAuthors.cshtml" />
+    <Content Include="Views\Author\AddorEditAuthors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

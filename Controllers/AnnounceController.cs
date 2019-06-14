@@ -33,13 +33,7 @@ namespace ESMB_Intl_Admin_FB.Controllers
             }
         }
 
-        //IEnumerable<Author> GetAllAuthors()
-        //{
-        //    using (var db = new TrueDBModel())
-        //    {
-        //        return db.Authors.ToList();
-        //    }
-        //}
+        
         
         public ActionResult AddOrEdit(int id = 0)
         {

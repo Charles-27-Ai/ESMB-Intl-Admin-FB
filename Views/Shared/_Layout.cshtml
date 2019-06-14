@@ -60,7 +60,7 @@
     <div id="main-wrapper">
         @RenderBody()
     </div>
-    
+
 
     <!-- All jQuery -->
     <script src="~/App_Assets/plugins/jquery/jquery.min.js"></script>
@@ -72,9 +72,7 @@
     <script src="~/App_Assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="~/App_Assets/plugins/sparkline/jquery.sparkline.min.js"></script>
     <script src="~/Scripts/custom.min.js"></script>
-    <script src="~/App_Assets/plugins/footable/js/footable.all.min.js"></script>
     <script src="~/App_Assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
-    <script src="~/Scripts/footable-init.js"></script>
     <script src="~/App_Assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
     <script src="~/App_Assets/plugins/icheck/icheck.min.js"></script>
     <script src="~/App_Assets/plugins/icheck/icheck.init.js"></script>
@@ -83,18 +81,23 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/notify.min.js"></script>
 
+    <!-- Footable (Dynamic Data Table) -->
+    <script src="~/App_Assets/plugins/footable/js/footable.all.min.js"></script>
+    <script src="~/Scripts/footable-init.js"></script>
+
     <!-- Sweet-Alert  -->
     <script src="~/App_Assets/plugins/sweetalert/sweetalert.min.js"></script>
-    
-<script src="~/Scripts/Site.js"></script>
 
 
-<!-- jQuery file upload -->
+
+    <!-- Site js -->
+    <script src="~/Scripts/Site.js"></script>
+
+
+    <!-- jQuery file upload -->
     <script src="~/App_Assets/plugins/dropify/dist/js/dropify.min.js"></script>
     <script>
-
         $(function () {
-
             // Basic
             $(".dropify").dropify();
 

@@ -31,6 +31,14 @@ $(window).on('load', function() {
 		$('#demo-foo-addrow2').trigger('footable_initialized');
 	});
 
+    $("#author-table").footable();
+    $('#author-show-entries').change(function (e) {
+        e.preventDefault();
+        var pageSize = $(this).val();
+        $('#author-table').data('page-size', pageSize);
+        $('#author-table').trigger('footable_initialized');
+    });
+
 	// Filtering
 	// -----------------------------------------------------------------
 	var filtering = $('#demo-foo-filtering');
@@ -61,6 +69,13 @@ $(window).on('load', function() {
 		e.preventDefault();
 		addrow.trigger('footable_filter', {filter: $(this).val()});
 	});
+
+    var author = $('#author-table');
+
+    $('#author-search').on('input', function (e) {
+        e.preventDefault();
+        author.trigger('footable_filter', {filter: $(this).val()});
+    });
 	
 
 

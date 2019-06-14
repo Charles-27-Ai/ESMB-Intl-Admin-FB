@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "EMSB Intl Admin";
+    ViewBag.Title = "EMSB Intl Authors";
 }
+
 
 <!-- ============================================================== -->
 <!-- Topbar header - style you can find in pages.scss -->
@@ -206,23 +207,22 @@
                                 <a class="nav-link active" data-toggle="tab" href="#allViewTab" role="tab">View All</a>
                             </li>
                             <li class="nav-item">
-                               <a class="nav-link" data-toggle="tab" href="#newAnnoTab" role="tab">Add New</a>
+                                <a class="nav-link" data-toggle="tab" href="#newAnnoTab" role="tab">Add New</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
                             <div id="allViewTab" class="tab-pane active" role="tabpanel">
                                 <!-- All Announcements Tab-->
-                                @Html.Action("ViewAll")
+                                @Html.Action("ViewAllAuthors")
                             </div>
 
                             <div id="newAnnoTab" class="tab-pane fade in p-t-20" role="tabpanel">
                                 <!-- Edit & Add -->
-                                @Html.Action("AddOrEdit")
+                                @Html.Action("AddOrEditAuthors")
 
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -301,5 +301,3 @@
 </div>
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
-
-
