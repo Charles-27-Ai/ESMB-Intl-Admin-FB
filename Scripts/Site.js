@@ -81,14 +81,9 @@ function refreshAddNewTab(resetUrl, showViewTab) {
             $("#newAnnoTab").html(response);
             $("ul.nav.nav-tabs a:eq(1)").html("Add New");
             if (showViewTab) {
-                //$("ul.nav.nav-tabs a:eq(0)").tab("show");
-                window.location.reload();
+                //window.location.reload();
                 $("ul.nav.nav-tabs a:eq(0)").tab("show");
 
-                //window.onload = function () {
-                //    $("ul.nav.nav-tabs a:eq(0)").tab("show");
-
-                //}
             }
         }
     });
@@ -101,7 +96,7 @@ function refreshAddNewAuthorTab(resetUrl, showViewTab) {
         url: resetUrl,
         success: function(response) {
             $("#newAuthorTab").html(response);
-            $("ul.nav.nav-tabs a:eq(1)").html("Add New Author");
+            $("ul.nav.nav-tabs a:eq(1)").html("Add New Admin");
             if (showViewTab) {
                 //window.location.reload();
                 $("ul.nav.nav-tabs a:eq(0)").tab("show");
@@ -130,7 +125,7 @@ function EditAuthor(url) {
         url: url,
         success: function(response) {
             $("#newAuthorTab").html(response);
-            $("ul.nav.nav-tabs a:eq(1)").html("Edit Author");  // Change the name of tab
+            $("ul.nav.nav-tabs a:eq(1)").html("Edit Admin");  // Change the name of tab
             $("ul.nav.nav-tabs a:eq(1)").tab("show");
         }
     });

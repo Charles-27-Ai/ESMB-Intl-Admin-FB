@@ -84,8 +84,14 @@
         </div>
         <div class="col-md-12 m-b-20 text-right">
             <div class="form-group">
+                @if (Model.AnnoID != 0)
+                {
+                    <a class="btn btn-secondary waves-effect"
+                       onclick="refreshAddNewTab('@Url.Action("AddOrEdit", "Announce", new {id = 0})', false)">
+                        <i class="ti-plus"></i>&nbsp;Add New
+                    </a>
+                }
                 <button type="submit" class="btn btn-danger waves-effect">Submit</button>
-                
             </div>
         </div>
     </div>

@@ -48,8 +48,14 @@
     
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            @*<input type="submit" value="Save" class="btn btn-default" />*@
             <button type="submit" class="btn btn-danger waves-effect">Submit</button>
+            @if (Model.AuthorID != 0)
+            {
+                <a class="btn btn-secondary waves-effect"
+                        onclick="refreshAddNewAuthorTab('@Url.Action("AddorEditAuthors", "Author", new {id = 0})', false)">
+                    <i class="ti-plus"></i>&nbsp;Add New
+                </a>
+            }
         </div>
     </div>
 </div>

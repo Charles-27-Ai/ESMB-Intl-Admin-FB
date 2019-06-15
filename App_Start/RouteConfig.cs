@@ -14,6 +14,12 @@ namespace ESMB_Intl_Admin_FB
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "Author",
+                "Author",
+                new { Controller = "Author", Action = "Author"}
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Announce", action = "Index", id = UrlParameter.Optional }
