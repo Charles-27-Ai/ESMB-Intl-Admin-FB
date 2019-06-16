@@ -44,3 +44,26 @@ namespace ESMB_Intl_Admin_FB.Models
 
     }
 }
+
+//namespace ESMB_Intl_Admin_FB.Models
+//{
+//    using System;
+//    using System.Collections.Generic;
+    
+//    public partial class Author
+//    {
+//        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+//        public Author()
+//        {
+//            this.TrueAnnouncements = new HashSet<TrueAnnouncement>();
+//        }
+    
+//        public int AuthorID { get; set; }
+//        public string AuthorCode { get; set; }
+//        public string AuthorFLName { get; set; }
+//        public string AuthorLevel { get; set; }
+    
+//        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+//        public virtual ICollection<TrueAnnouncement> TrueAnnouncements { get; set; }
+//    }
+//}

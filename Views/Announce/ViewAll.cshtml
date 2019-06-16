@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ESMB_Intl_Admin_FB.Models.TrueAnnouncement>
+﻿@using ESMB_Intl_Admin_FB.Models
+@model IEnumerable<ESMB_Intl_Admin_FB.Models.TrueAnnouncement>
 @*@using ESMB_Intl_Admin_FB.Models
 @model dynamic*@
 
@@ -53,19 +54,20 @@
         </div>
     </div>
     <tbody>
+    
         @foreach (var item in Model)
         {
             var rowClass = "d-none";
 
             <tr class="
-                @{
-                    if ((string)@Session["userLevel"] != "m" && (int)@Session["userID"] != item.AuthorID)
+                    @if ((string) @Session["userLevel"] != "m" && (int) @Session["userID"] != item.AuthorID)
                     {
                         @rowClass
                     }
-                }
-                ">
-                <td>@Html.DisplayFor(modelItem => item.Sender)</td>
+                    ">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.AuthorFLName)
+                </td>
                 <td>@Html.DisplayFor(modelItem => item.AuthorID)</td>
                 <td><a href="@Html.DisplayFor(modelItem => item.ImgPath)" class="btn btn-link">View Image</a></td>
                 <td>@Html.DisplayFor(modelItem => item.Title)</td>
@@ -96,7 +98,9 @@
                 </td>
             </tr>
         }
-        @*@{
+
+
+    @*@{
             if ((string)@Session["userLevel"] == "m")
             {
                 foreach (TrueAnnouncement item in Model.Announcements)

@@ -5,8 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="22ff9138036e4307b0c7fa85ed7c573b" Name="Diagram1">
-        <EntityTypeShape EntityType="TrueEMSBAdminDBModel.Author" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrueEMSBAdminDBModel.TrueAnnouncement" Width="1.5" PointX="3.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrueEMSBAdminDBModel.Author" Width="1.5" PointX="8.375" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrueEMSBAdminDBModel.TrueAnnouncement" Width="1.5" PointX="10.875" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="TrueEMSBAdminDBModel.FK_TrueAnnouncements_Authors" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

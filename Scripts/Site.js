@@ -147,7 +147,10 @@ function Delete(url) {
             url: url,
             success: function(response) {
                 if (response.success) {
-                    $("#allViewTab").html(response.html);
+                    window.location.reload();
+                    window.onload = function() {
+                        $("#allViewTab").html(response.html);
+                    }
                     //$.notify(response.message, "warn");
                     //这里我实在是不懂如何在 确定后再执行这些 ajax 语句
                     if (typeof activateJqueryTable !== "undefined" && $.isFunction(activateJqueryTable))

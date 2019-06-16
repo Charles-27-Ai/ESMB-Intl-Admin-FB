@@ -6,6 +6,7 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -54,3 +55,24 @@ namespace ESMB_Intl_Admin_FB.Models
         }
     }
 }
+
+//namespace ESMB_Intl_Admin_FB.Models
+//{
+//    using System;
+//    using System.Collections.Generic;
+    
+//    public partial class TrueAnnouncement
+//    {
+//        public int AnnoID { get; set; }
+//        public Nullable<int> AuthorID { get; set; }
+//        public string Title { get; set; }
+//        public string Text { get; set; }
+//        public string Sender { get; set; }
+//        public Nullable<int> Added { get; set; }
+//        public Nullable<int> Updated { get; set; }
+//        public string Status { get; set; }
+//        public string ImgPath { get; set; }
+    
+//        public virtual Author Author { get; set; }
+//    }
+//}

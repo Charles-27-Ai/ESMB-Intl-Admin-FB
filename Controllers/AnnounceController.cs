@@ -20,11 +20,6 @@ namespace ESMB_Intl_Admin_FB.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-
-            //dynamic myModel = new System.Dynamic.ExpandoObject();
-            //myModel.Annoucements = GetAllAnnouncements();
-            //myModel.Authors = GetAuthor((int)Session["userID"]);
-
             return View();
         }
 
@@ -32,8 +27,6 @@ namespace ESMB_Intl_Admin_FB.Controllers
         {
             return View(GetAllAnnouncements());
         }
-
-
 
         IEnumerable<TrueAnnouncement> GetAllAnnouncements()
         {
