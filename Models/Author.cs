@@ -26,6 +26,7 @@ namespace ESMB_Intl_Admin_FB.Models
         public int AuthorID { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
+        [DisplayName("Code")]
         public string AuthorCode { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
@@ -33,8 +34,13 @@ namespace ESMB_Intl_Admin_FB.Models
         public string AuthorFLName { get; set; }
 
         public string AuthorLevel { get; set; }
+
+        public string LoginErrorMessage { get; set; }
+
+        public bool BufferOutput { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrueAnnouncement> TrueAnnouncements { get; set; }
+
     }
 }

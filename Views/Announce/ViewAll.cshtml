@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ESMB_Intl_Admin_FB.Models.TrueAnnouncement>
+@*@model ESMB_Intl_Admin_FB.Models.Author*@
 
 @{
     ViewBag.Title = "ViewAll";
     Layout = null;
 }
-
 
 <table id="demo-foo-addrow2" class="table table-bordered table-hover toggle-circle" data-page-size="10">
     <thead>
@@ -23,13 +23,14 @@
     <div class="m-t-40">
         <div class="d-flex">
             <div class="mr-auto">
-                <label class="form-inline">Show &nbsp;
+                <label class="form-inline">
+                    Show &nbsp;
                     <select id="demo-show-entries">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
                     </select>
-                    &nbsp; entries 
+                    &nbsp; entries
                 </label>
             </div>
             <div class="ml-auto">
@@ -40,40 +41,41 @@
         </div>
     </div>
     <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Sender)</td>
-            <td>@Html.DisplayFor(modelItem => item.AuthorID)</td>
-            <td><a href="@Html.DisplayFor(modelItem => item.ImgPath)" class="btn btn-link">View Image</a></td>
-            <td>@Html.DisplayFor(modelItem => item.Title)</td>
-            <td>@Html.DisplayFor(modelItem => item.Text)</td>
-            <td>@Html.DisplayFor(modelItem => item.Added)</td>
-            <td>@Html.DisplayFor(modelItem => item.Updated)</td>
-            <td>
-                @{
-                    if (@item.Status == "Published")
-                    {
-                        <span class="label label-table label-success">Published</span>
-                    } else if (@item.Status == "Drafted")
-                    {
-                        <span class="label label-table label-warning">Drafted</span>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Sender)</td>
+                <td>@Html.DisplayFor(modelItem => item.AuthorID)</td>
+                <td><a href="@Html.DisplayFor(modelItem => item.ImgPath)" class="btn btn-link">View Image</a></td>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.Text)</td>
+                <td>@Html.DisplayFor(modelItem => item.Added)</td>
+                <td>@Html.DisplayFor(modelItem => item.Updated)</td>
+                <td>
+                    @{
+                        if (@item.Status == "Published")
+                        {
+                            <span class="label label-table label-success">Published</span>
+                        }
+                        else if (@item.Status == "Drafted")
+                        {
+                            <span class="label label-table label-warning">Drafted</span>
+                        }
                     }
-                }
-            </td>
-            <td>
-                <a class="btn btn-link btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Announce", new { id = @item.AnnoID})')"><i class="ti-pencil"></i></a>
-                <a class="btn btn-link btn-sm" onclick="Delete('@Url.Action("Delete", "Announce", new { id = @item.AnnoID})')"><i class="ti-trash"></i></a>
-                @{
-                    if (@item.Status == "Drafted")
-                    {
-                        <a class="btn btn-link btn-sm" onclick="Publish()"><i class="ti-check"></i></a>
+                </td>
+                <td>
+                    <a class="btn btn-link btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Announce", new { id = @item.AnnoID})')"><i class="ti-pencil"></i></a>
+                    <a class="btn btn-link btn-sm" onclick="Delete('@Url.Action("Delete", "Announce", new { id = @item.AnnoID})')"><i class="ti-trash"></i></a>
+                    @{
+                        if (@item.Status == "Drafted")
+                        {
+                            <a class="btn btn-link btn-sm" onclick="Publish()"><i class="ti-check"></i></a>
+                        }
                     }
-                }
-            </td>
-        </tr>
-    }
-    
+                </td>
+            </tr>
+        }
+
 
     </tbody>
     <tfoot>

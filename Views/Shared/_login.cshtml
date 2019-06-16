@@ -1,0 +1,65 @@
+﻿@model ESMB_Intl_Admin_FB.Models.Author
+    
+<div id="login-form" class="d-none">
+    @using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
+    {
+        <form>
+            <div class="row">
+                <div class="col-sm-12">
+                    @Html.LabelFor(model => model.AuthorCode)
+                    @Html.EditorFor(model => model.AuthorCode)
+                    @Html.ValidationMessageFor(model => model.AuthorCode)
+                </div>
+            </div>
+        </form>
+    }
+</div>
+
+<script type="text/javascript">
+    
+    var loginForm = $('#login-form > form').clone()[0];
+
+    $('#login-form').remove();
+
+    var swalConfig = {
+        title: 'Please Enter Your Admin Code',
+        content: loginForm,
+        button: {
+            text: 'OK',
+            closeModal: false
+        }
+    };
+
+    swal(swalConfig);  // fire Swal
+
+    $('body').on('click',
+        '.swal-button--confirm',
+        function() {
+            loginAjaxPost();
+        });
+
+    function loginAjaxPost(form) {  // reach to AnnounceController 里的 HttpPost 下的 method
+        $.validator.unobtrusive.parse(form);
+        if ($(form).valid()) {
+            var ajaxConfig = {
+                type: "POST",
+                url: form.action,
+                data: new FormData(form),
+                success: function(response) {
+                
+                    if (response.success) {
+                        //Success message
+                        $.notify(response.message, "success");
+                    } else {
+                        //Error message
+                        $.notify(response.message, "error");
+                    }
+                }
+            }            
+            $.ajax(ajaxConfig);
+        }
+
+        return false;
+    }
+
+</script>

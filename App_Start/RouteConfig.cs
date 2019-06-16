@@ -20,9 +20,15 @@ namespace ESMB_Intl_Admin_FB
             );
 
             routes.MapRoute(
+                "Login",
+                "Login",
+                new { Controller = "Login", Action = "Login"}
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Announce", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

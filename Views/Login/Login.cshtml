@@ -1,0 +1,43 @@
+﻿@model ESMB_Intl_Admin_FB.Models.Author
+
+@{
+    ViewBag.Title = "Login";
+    Response.BufferOutput = true;
+
+}
+
+    <div class="login-register" style="background-image:url(~/App_Assets/images/background/login-register.jpg);">
+        <div class="login-box card">
+            <div class="card-body">
+
+                @using (Html.BeginForm("Authorize", "Login", FormMethod.Post,
+                                  new { @class = "form-horizontal form-material", @id = "loginform" }))
+                {
+                    <h3 class="box-title m-b-20">Admin Login</h3>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            @Html.EditorFor(model => model.AuthorCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Admin Code here" } })
+                        </div>
+                        <div class="col-xs-12 text-danger">
+                            @Html.ValidationMessageFor(model => model.AuthorCode)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 font-14">
+                            <div class="checkbox checkbox-primary pull-left p-t-0">
+                                <input id="checkbox-signup" type="checkbox">
+                                <label for="checkbox-signup"> Remember me </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+

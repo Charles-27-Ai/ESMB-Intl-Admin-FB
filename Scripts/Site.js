@@ -8,14 +8,13 @@ function jQueryAjaxPost(form) {  // reach to AnnounceController 里的 HttpPost 
             url: form.action,
             data: new FormData(form),
             success: function(response) {
-                //$("#allViewTab").html(response);
-                //refreshAddNewTab($(form).attr("data-restUrl"), true);
                 
                 if (response.success) {
                     $("#allViewTab").html(response.html);
+                    window.location.reload(); // Reload page to load CSS
                     refreshAddNewTab($(form).attr("data-restUrl"), true);
                     //Success message
-                    $.notify(response.message, "success");
+                    //$.notify(response.message, "success");
                     //Call activateJqueryTable func
                     if (typeof activateJqueryTable !== "undefined" && $.isFunction(activateJqueryTable))
                         activateJqueryTable();

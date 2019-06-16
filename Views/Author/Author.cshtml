@@ -1,6 +1,11 @@
 ﻿
 @{
     ViewBag.Title = "EMSB Intl Authors";
+    
+    if (Session["userCode"] == null) // prevent URL insert 
+    {
+        Response.Redirect("~/Login");
+    }
 }
 
 
@@ -89,7 +94,7 @@
         <!-- End User profile text-->
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
-            <ul id="sidebarnav">
+            <ul>
                 <li class="nav-devider"></li>
                 <li>
                     <a href="/announce">
