@@ -12,6 +12,12 @@ namespace ESMB_Intl_Admin_FB
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
+            routes.MapRoute(
+                "Announce",
+                "Announce",
+                new { Controller = "Announce", Action = "Index"}
+            );
 
             routes.MapRoute(
                 "Author",

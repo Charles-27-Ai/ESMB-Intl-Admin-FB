@@ -15,6 +15,16 @@ namespace ESMB_Intl_Admin_FB.Controllers
         // GET: Author
         public ActionResult Author()
         {
+            if (Session["userCode"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            if ((string) Session["userLevel"] != "m")
+            {
+                return RedirectToAction("Index", "Announce");
+            }
+
             return View();
         }
 

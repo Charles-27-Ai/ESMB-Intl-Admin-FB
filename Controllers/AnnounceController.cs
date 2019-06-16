@@ -16,6 +16,10 @@ namespace ESMB_Intl_Admin_FB.Controllers
         // GET
         public ActionResult Index()
         {
+            if (Session["userCode"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View();
         }
 

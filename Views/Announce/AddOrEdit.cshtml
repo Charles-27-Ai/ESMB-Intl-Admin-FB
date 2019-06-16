@@ -29,7 +29,6 @@
                 @Html.TextBoxFor(model => model.AuthorID, new { @Value = @Session["userID"], @type = "hidden"})
 
                 <div class="col-md-12 m-b-20">
-                    @*<input type="text" class="form-control" placeholder="Announcement Title" required>*@
                     @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Announcement Title" } })
                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                 </div>
@@ -54,6 +53,8 @@
                     int NowInt = 0;
                     NowInt = Convert.ToInt32(Now);
                 }
+                
+                
                 @Html.TextBoxFor(model => model.Added, new { @Value = @NowInt, @type = "hidden" })
 
                 @Html.TextBoxFor(model => model.Updated, new { @Value = @NowInt, @type = "hidden" })

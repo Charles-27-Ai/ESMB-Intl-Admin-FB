@@ -41,7 +41,7 @@ namespace ESMB_Intl_Admin_FB.Controllers
 
         public ActionResult LogOut()
         {
-            var userCode = Session["userCode"];
+            //var userCode = Session["userCode"];
             Session.Abandon();
             //return RedirectToAction("Login", "Login");
             return Redirect("/login");

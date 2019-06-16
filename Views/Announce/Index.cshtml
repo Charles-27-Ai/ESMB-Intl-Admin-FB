@@ -1,11 +1,6 @@
 ﻿
 @{
     ViewBag.Title = "EMSB Intl Admin";
-    
-    if (Session["userCode"] == null) // prevent URL insert 
-    {
-        Response.Redirect("~/Login");
-    }
 }
 
 <!-- ============================================================== -->
@@ -67,39 +62,26 @@
             </div>
             <!-- User profile text-->
             <div class="profile-text">
-                <h5>@Session["userName"]</h5>
                 @{
-                    if ((string)@Session["userLevel"] != "m")
+                    if (@Session["userCode"] != null)
                     {
-                        <span class="badge badge-pill badge-info">Normal</span>
+                        <h5>@Session["userName"]</h5>
+                        if ((string) @Session["userLevel"] != "m")
+                        {
+                            <span class="badge badge-pill badge-info">Normal</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-pill badge-primary">Master</span>
+                        }
                     }
                     else
                     {
-                        <span class="badge badge-pill badge-primary">Master</span>
+                        <h5>Invalid User</h5>
+                        <span class="badge badge-pill badge-danger">Access Denied</span>
                     }
                 }
-                <a href="@Url.Action("LogOut", "Login")" class="btn btn-link m-t-4"><i class="fa fa-power-off"></i></a>
-
-                @*<a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><i class="mdi mdi-settings"></i></a>
-        <a href="app-email.html" class="" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-        <a href="pages-login.html" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
-        <div class="dropdown-menu animated flipInY">
-            <!-- text-->
-            <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-            <!-- text-->
-            <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-            <!-- text-->
-            <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-            <!-- text-->
-            <div class="dropdown-divider"></div>
-            <!-- text-->
-            <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-            <!-- text-->
-            <div class="dropdown-divider"></div>
-            <!-- text-->
-            <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-            <!-- text-->
-        </div>*@
+                <a href="@Url.Action("LogOut", "Login")" class="btn btn-link m-t-4" data-toggle="tooltip" title="Logout"><i class="fa fa-power-off"></i></a>
             </div>
         </div>
         <!-- End User profile text-->
@@ -113,11 +95,17 @@
                         <i class="ti-save-alt"></i><b>ANNOUNCEMENTS</b>
                     </a>
                 </li>
-                <li>
-                    <a href="/author">
-                        <i class="ti-direction"></i>ADMIN ACCOUNTS
-                    </a>
-                </li>
+                @{
+                    if ((string) @Session["userLevel"] == "m")
+                    {
+                        <li>
+                            <a href="/author">
+                                <i class="ti-direction"></i>ADMIN ACCOUNTS
+                            </a>
+                        </li>
+                    }
+                }
+                
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
