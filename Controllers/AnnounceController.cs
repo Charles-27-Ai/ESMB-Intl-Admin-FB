@@ -20,6 +20,11 @@ namespace ESMB_Intl_Admin_FB.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
+
+            //dynamic myModel = new System.Dynamic.ExpandoObject();
+            //myModel.Annoucements = GetAllAnnouncements();
+            //myModel.Authors = GetAuthor((int)Session["userID"]);
+
             return View();
         }
 
@@ -28,17 +33,24 @@ namespace ESMB_Intl_Admin_FB.Controllers
             return View(GetAllAnnouncements());
         }
 
+
+
         IEnumerable<TrueAnnouncement> GetAllAnnouncements()
         {
             using (var db = new TrueDBModel())
             {
-                //return db.TrueAnnouncements.Include().ToList();
                 return db.TrueAnnouncements.Include(a => a.Author).ToList();
             }
         }
 
-        
-        
+        //IEnumerable<Author> GetAuthor(int id)
+        //{
+        //    using (var db = new TrueDBModel())
+        //    {
+        //        return db.Authors.Include(a => a.TrueAnnouncements).Where(y => y.AuthorID == id).ToList();
+        //    }
+        //}
+
         public ActionResult AddOrEdit(int id = 0)
         {
             var anno = new TrueAnnouncement();

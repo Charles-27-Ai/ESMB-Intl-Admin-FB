@@ -1,4 +1,5 @@
-﻿
+﻿@using ESMB_Intl_Admin_FB.Models
+@model dynamic
 @{
     ViewBag.Title = "EMSB Intl Admin";
 }
@@ -66,7 +67,7 @@
                     if (@Session["userCode"] != null)
                     {
                         <h5>@Session["userName"]</h5>
-                        if ((string) @Session["userLevel"] != "m")
+                        if ((string)@Session["userLevel"] != "m")
                         {
                             <span class="badge badge-pill badge-info">Normal</span>
                         }
@@ -96,7 +97,7 @@
                     </a>
                 </li>
                 @{
-                    if ((string) @Session["userLevel"] == "m")
+                    if ((string)@Session["userLevel"] == "m")
                     {
                         <li>
                             <a href="/author">
@@ -105,7 +106,7 @@
                         </li>
                     }
                 }
-                
+
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
@@ -159,7 +160,7 @@
                                 <a class="nav-link active" data-toggle="tab" href="#allViewTab" role="tab">View All</a>
                             </li>
                             <li class="nav-item">
-                               <a class="nav-link" data-toggle="tab" href="#newAnnoTab" role="tab">Add New</a>
+                                <a class="nav-link" data-toggle="tab" href="#newAnnoTab" role="tab">Add New</a>
                             </li>
                         </ul>
 
@@ -254,5 +255,3 @@
 </div>
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
-
-

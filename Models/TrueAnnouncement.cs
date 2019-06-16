@@ -19,8 +19,6 @@ namespace ESMB_Intl_Admin_FB.Models
     
     public partial class TrueAnnouncement
     {
-        
-
         public int AnnoID { get; set; }
 
         [Required(ErrorMessage = "This field is required")]

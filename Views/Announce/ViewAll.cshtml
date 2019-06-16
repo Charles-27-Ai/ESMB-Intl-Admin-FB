@@ -1,9 +1,12 @@
 ﻿@model IEnumerable<ESMB_Intl_Admin_FB.Models.TrueAnnouncement>
+@*@using ESMB_Intl_Admin_FB.Models
+@model dynamic*@
 
 @{
     ViewBag.Title = "ViewAll";
     Layout = null;
 }
+
 
 <table id="demo-foo-addrow2" class="table table-bordered table-hover toggle-circle" data-page-size="10">
     <thead>
@@ -17,6 +20,16 @@
             <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Updated)</th>
             <th data-hide="phone">@Html.DisplayNameFor(model => model.Status)</th>
             <th data-sort-ignore="true" class="min-width">Actions</th>
+
+            @*<th data-toggle="true" class="min-width">Author</th>
+            <th data-hide="phone, tablet">Author ID</th>
+            <th data-hide="all">ImagePath</th>
+            <th>Title</th>
+            <th data-hide="all">Content</th>
+            <th data-sort-initial="true" data-hide="phone">Date & Time</th>
+            <th data-hide="phone, tablet">Created at:</th>
+            <th data-hide="phone">Status</th>
+            <th data-sort-ignore="true" class="min-width">Actions</th>*@
         </tr>
     </thead>
     <div class="m-t-40">
@@ -42,7 +55,16 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            var rowClass = "d-none";
+
+            <tr class="
+                @{
+                    if ((string)@Session["userLevel"] != "m" && (int)@Session["userID"] != item.AuthorID)
+                    {
+                        @rowClass
+                    }
+                }
+                ">
                 <td>@Html.DisplayFor(modelItem => item.Sender)</td>
                 <td>@Html.DisplayFor(modelItem => item.AuthorID)</td>
                 <td><a href="@Html.DisplayFor(modelItem => item.ImgPath)" class="btn btn-link">View Image</a></td>
@@ -63,8 +85,8 @@
                     }
                 </td>
                 <td>
-                    <a class="btn btn-link btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Announce", new { id = @item.AnnoID})')"><i class="ti-pencil"></i></a>
-                    <a class="btn btn-link btn-sm" onclick="Delete('@Url.Action("Delete", "Announce", new { id = @item.AnnoID})')"><i class="ti-trash"></i></a>
+                    <a class="btn btn-link btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Announce", new {id = @item.AnnoID})')"><i class="ti-pencil"></i></a>
+                    <a class="btn btn-link btn-sm" onclick="Delete('@Url.Action("Delete", "Announce", new {id = @item.AnnoID})')"><i class="ti-trash"></i></a>
                     @{
                         if (@item.Status == "Drafted")
                         {
@@ -74,7 +96,96 @@
                 </td>
             </tr>
         }
+        @*@{
+            if ((string)@Session["userLevel"] == "m")
+            {
+                foreach (TrueAnnouncement item in Model.Announcements)
+                {
+                    <tr>
+                        <td>
+                             Get Author Name from AuthorDB
+                            @foreach (Author user in Model.Authors)
+                            {
+                                @user.AuthorFLName
+                            }
+                        </td>
+                        <td>@item.AuthorID</td>
+                        <td><a href="@item.ImgPath" class="btn btn-link">View Image</a></td>
+                        <td>@item.Title</td>
+                        <td>@item.Text</td>
+                        <td>@item.Updated</td>
+                        <td>@item.Added</td>
+                        <td>
+                            @{
+                                if (@item.Status == "Published")
+                                {
+                                    <span class="label label-table label-success">Published</span>
+                                }
+                                else if (@item.Status == "Drafted")
+                                {
+                                    <span class="label label-table label-warning">Drafted</span>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-link btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Announce", new {id = @item.AnnoID})')"><i class="ti-pencil"></i></a>
+                            <a class="btn btn-link btn-sm" onclick="Delete('@Url.Action("Delete", "Announce", new {id = @item.AnnoID})')"><i class="ti-trash"></i></a>
+                            @{
+                                if (@item.Status == "Drafted")
+                                {
+                                    <a class="btn btn-link btn-sm" onclick="Publish()"><i class="ti-check"></i></a>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            }
 
+            下面要改成只输出当前 normal 账号书写的 announcements
+            else
+            {
+                foreach (TrueAnnouncement item in Model.Announcements)
+                {
+                    <tr>
+                        <td>
+                            <!-- Get Author Name from AuthorDB -->
+                            @foreach (Author user in Model.Authors)
+                            {
+                                @user.AuthorFLName
+                            }
+                        </td>
+                        <td>@item.AuthorID</td>
+                        <td><a href="@item.ImgPath" class="btn btn-link">View Image</a></td>
+                        <td>@item.Title</td>
+                        <td>@item.Text</td>
+                        <td>@item.Updated</td>
+                        <td>@item.Added</td>
+                        <td>
+                            @{
+                                if (@item.Status == "Published")
+                                {
+                                    <span class="label label-table label-success">Published</span>
+                                }
+                                else if (@item.Status == "Drafted")
+                                {
+                                    <span class="label label-table label-warning">Drafted</span>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-link btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Announce", new {id = @item.AnnoID})')"><i class="ti-pencil"></i></a>
+                            <a class="btn btn-link btn-sm" onclick="Delete('@Url.Action("Delete", "Announce", new {id = @item.AnnoID})')"><i class="ti-trash"></i></a>
+                            @{
+                                if (@item.Status == "Drafted")
+                                {
+                                    <a class="btn btn-link btn-sm" onclick="Publish()"><i class="ti-check"></i></a>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        }*@
 
     </tbody>
     <tfoot>
