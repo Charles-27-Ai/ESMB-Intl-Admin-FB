@@ -34,6 +34,51 @@ function jQueryAjaxPost(form) {  // reach to AnnounceController 里的 HttpPost 
     return false;
 }
 
+// Publish drafted announcement
+function jQueryAjaxPostDraft(form) {  // reach to AnnounceController 里的 HttpPost 下的 method
+    //$.validator.unobtrusive.parse(form);
+    if ($(form).valid()) {
+        swal({
+                title: "Are you sure to publish?",
+                text: "You will not be able to recover this announcement    ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, publish it!",
+                closeOnConfirm: false
+            },
+            function() {
+                var ajaxConfig = {
+                    type: "POST",
+                    url: form.action,
+                    data: new FormData(form),
+                    success: function(response) {
+                        if (response.success) {
+                            $("#allViewTab").html(response.html);
+                            window.location.reload(); // Reload page to load CSS
+                            //refreshAddNewTab($(form).attr("data-restUrl"), true);
+                            //Success message
+                            //$.notify(response.message, "success");
+                            //Call activateJqueryTable func
+                            if (typeof activateJqueryTable !== "undefined" && $.isFunction(activateJqueryTable))
+                                activateJqueryTable();
+                        } else {
+                            //Error message
+                            $.notify(response.message, "error");
+                        }
+                    }
+                }
+                if ($(form).attr("enctype") == "multipart/form-data") {
+                    ajaxConfig["contentType"] = false;
+                    ajaxConfig["processData"] = false;
+                }
+                $.ajax(ajaxConfig);
+            });
+    }
+
+    return false;
+}
+
 // Submit Author Form
 function jQueryAjaxPostAuthor(form) {  // reach to AnnounceController 里的 HttpPost 下的 method
     $.validator.unobtrusive.parse(form);
@@ -198,21 +243,6 @@ function DeleteAuthor(url) {
         });
 }
 
-function Publish() {
-    swal({
-            title: "Are you sure to publish?",
-            text: "You will not be able to recover this announcement    ",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, publish it!",
-            closeOnConfirm: false
-        },
-        function() {
-            swal("Published!", "Your announcement can be viewed by everyone!", "success");
-
-        });
-}
 
 
 
