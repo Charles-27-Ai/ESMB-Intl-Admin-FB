@@ -12,11 +12,11 @@
     data_restUrl = Url.Action("AddOrEdit", "Announce", new { id = 0 }),
     @class = "form-material m-t-25"
 }))
+
 {
     @Html.AntiForgeryToken()
-
-
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     @Html.HiddenFor(model => model.AnnoID)
     @Html.HiddenFor(model => model.ImgPath)
     <div class="row">
@@ -26,7 +26,6 @@
                     @Html.EditorFor(model => model.AuthorID, new { htmlAttributes = new { @class = "form-control", @placeholder = "AuthorID" } })
                     @Html.ValidationMessageFor(model => model.AuthorID, "", new { @class = "text-danger" })
                 </div>*@
-                @Html.TextBoxFor(model => model.AuthorID, new { @Value = @Session["userID"], @type = "hidden"})
 
                 <div class="col-md-12 m-b-20">
                     @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Announcement Title" } })
@@ -53,9 +52,19 @@
                     int NowInt = 0;
                     NowInt = Convert.ToInt32(Now);
                 }
-                
-                
-                @Html.TextBoxFor(model => model.Added, new { @Value = @NowInt, @type = "hidden" })
+
+                @*While in 'Edit' Mode, keep the author name and created time as they are*@
+                @if (Model.AnnoID != 0)
+                {
+                    @Html.EditorFor(model => model.AuthorID, new { htmlAttributes = new { @type = "hidden" } })
+                    @Html.EditorFor(model => model.Added, new { htmlAttributes = new { @type = "hidden" } })
+                }
+                else
+                {
+                    @Html.TextBoxFor(model => model.AuthorID, new { @Value = @Session["userID"], @type = "hidden" })
+                    @Html.TextBoxFor(model => model.Added, new { @Value = @NowInt, @type = "hidden" })
+
+                }
 
                 @Html.TextBoxFor(model => model.Updated, new { @Value = @NowInt, @type = "hidden" })
 
@@ -85,6 +94,7 @@
         </div>
         <div class="col-md-12 m-b-20 text-right">
             <div class="form-group">
+                @*While in 'Edit' Mode*@
                 @if (Model.AnnoID != 0)
                 {
                     <a class="btn btn-secondary waves-effect"

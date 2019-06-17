@@ -24,6 +24,12 @@ $(window).on('load', function() {
 	// Pagination
 	// -----------------------------------------------------------------
     $('#demo-foo-addrow2').footable();
+    //$('#demo-foo-addrow2').footable({
+    //    "columns": [{
+    //            "sorted": true,
+    //            "direction": "DESC"
+    //    }]
+    //});
 	$('#demo-show-entries').change(function (e) {
 		e.preventDefault();
 		var pageSize = $(this).val();

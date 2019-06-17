@@ -1,7 +1,5 @@
 ﻿@using ESMB_Intl_Admin_FB.Models
 @model IEnumerable<ESMB_Intl_Admin_FB.Models.TrueAnnouncement>
-@*@using ESMB_Intl_Admin_FB.Models
-@model dynamic*@
 
 @{
     ViewBag.Title = "ViewAll";
@@ -11,27 +9,19 @@
 
 <table id="demo-foo-addrow2" class="table table-bordered table-hover toggle-circle" data-page-size="10">
     <thead>
-    <tr>
-        <th data-toggle="true" class="min-width">@Html.DisplayNameFor(model => model.Sender)</th>
-        <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.AuthorID)</th>
-        <th data-hide="all">@Html.DisplayNameFor(model => model.ImgPath)</th>
-        <th>@Html.DisplayNameFor(model => model.Title)</th>
-        <th data-hide="all">@Html.DisplayNameFor(model => model.Text)</th>
-        <th data-sort-initial="true" data-hide="phone">@Html.DisplayNameFor(model => model.Added)</th>
-        <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Updated)</th>
-        <th data-hide="phone">@Html.DisplayNameFor(model => model.Status)</th>
-        <th data-sort-ignore="true" class="min-width">Actions</th>
-
-        @*<th data-toggle="true" class="min-width">Author</th>
-            <th data-hide="phone, tablet">Author ID</th>
-            <th data-hide="all">ImagePath</th>
-            <th>Title</th>
-            <th data-hide="all">Content</th>
-            <th data-sort-initial="true" data-hide="phone">Date & Time</th>
-            <th data-hide="phone, tablet">Created at:</th>
-            <th data-hide="phone">Status</th>
-            <th data-sort-ignore="true" class="min-width">Actions</th>*@
-    </tr>
+        <tr>
+            @*<th data-sort-initial="true" data-sorted="true" data-direction="DESC">@Html.DisplayNameFor(model => model.AnnoID)</th>*@
+            <th data-toggle="true" class="min-width">@Html.DisplayNameFor(model => model.Sender)</th>
+            @*<th data-hide="all">@Html.DisplayNameFor(model => model.AuthorID)</th>*@
+            <th data-hide="all">@Html.DisplayNameFor(model => model.ImgPath)</th>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th data-hide="all">@Html.DisplayNameFor(model => model.Text)</th>
+            <th data-hide="phone" data-sort-initial="true">@Html.DisplayNameFor(model => model.Updated)</th>
+            <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Added)</th>
+            <th data-hide="phone">@Html.DisplayNameFor(model => model.Status)</th>
+            <th data-sort-ignore="true" class="min-width">Actions</th>
+            @* data-sorted="true" data-direction="DESC"*@
+        </tr>
     </thead>
     <div class="m-t-40">
         <div class="d-flex">
@@ -65,15 +55,16 @@
                         @rowClass
                     }
                     ">
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.AuthorFLName)
-            </td>
-            <td>@Html.DisplayFor(modelItem => item.AuthorID)</td>
+            @*<td class="hidden">@Html.DisplayFor(modelItem => item.AnnoID)</td>*@
+            <td>@Html.DisplayFor(modelItem => item.Author.AuthorFLName)</td>
+
+            @*<td>@Html.DisplayFor(modelItem => item.AuthorID)</td>*@
             <td><a href="@Html.DisplayFor(modelItem => item.ImgPath)" class="btn btn-link">View Image</a></td>
             <td>@Html.DisplayFor(modelItem => item.Title)</td>
             <td>@Html.DisplayFor(modelItem => item.Text)</td>
-            <td>@Html.DisplayFor(modelItem => item.Added)</td>
             <td>@Html.DisplayFor(modelItem => item.Updated)</td>
+            <td>@Html.DisplayFor(modelItem => item.Added)</td>
+
             <td>
                 @{
                     if (@item.Status == "Published")
@@ -92,9 +83,6 @@
                 @{
                     if (@item.Status == "Drafted")
                     {
-                        //var draftFormId = "draft-form" + item.AnnoID;
-                        //var publishBtnId = "publish-btn" + item.AnnoID;
-
                         using (Html.BeginForm("AddOrEdit", "Announce", FormMethod.Post, new
                         {
                             enctype = "multipart/form-data",
@@ -106,35 +94,22 @@
                             <input type="hidden" name="AuthorID" value="@item.AuthorID" />
                             <input type="hidden" name="Title" value="@item.Title" />
                             <input type="hidden" name="Text" value="@item.Text" />
-                            <input type="hidden" name="Added" value="@item.Added" />
                             <input type="hidden" name="Updated" value="@item.Updated" />
+                            <input type="hidden" name="Added" value="@item.Added" />
                             <input type="hidden" name="Sender" value="@item.Sender" />
                             <input type="hidden" name="ImgPath" value="@item.ImgPath" />
                             <input type="hidden" name="Status" value="Published" />
                             @*@Html.HiddenFor(modelItem => item.AnnoID)
-                            @Html.HiddenFor(modelItem => item.AuthorID)
-                            @Html.HiddenFor(modelItem => item.Title)
-                            @Html.HiddenFor(modelItem => item.Text)
-                            @Html.HiddenFor(modelItem => item.Added)
-                            @Html.HiddenFor(modelItem => item.Updated)
-                            @Html.HiddenFor(modelItem => item.Sender)
-                            @Html.HiddenFor(modelItem => item.ImgPath)
-                            @Html.TextBoxFor(modelItem => item.Status, new { @Value = "Published", @type = "hidden" })*@
+                        @Html.HiddenFor(modelItem => item.AuthorID)
+                        @Html.HiddenFor(modelItem => item.Title)
+                        @Html.HiddenFor(modelItem => item.Text)
+                        @Html.HiddenFor(modelItem => item.Added)
+                        @Html.HiddenFor(modelItem => item.Updated)
+                        @Html.HiddenFor(modelItem => item.Sender)
+                        @Html.HiddenFor(modelItem => item.ImgPath)
+                        @Html.TextBoxFor(modelItem => item.Status, new { @Value = "Published", @type = "hidden" })*@
                             <button class="btn btn-link btn-sm" type="submit"><i class="ti-check"></i></button>
                         }
-
-                        @*<form method="post" class="hidden" id="@draftFormId"></form>*@
-                        @*<a class="btn btn-link btn-sm" id="@publishBtnId"><i class="ti-check"></i>Publish</a>*@
-                        @*<script>
-                    $(function() {
-                        if (confirm("Mi-joo is beautiful?")) {
-                            $("#@publishBtnId").click(function() {
-                                $("#@draftFormId").submit();
-                            });
-                            window.location.reload();
-                        }
-                    });
-                </script>*@
                     }
                 }
             </td>
