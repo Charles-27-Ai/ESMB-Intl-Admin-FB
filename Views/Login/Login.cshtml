@@ -1,4 +1,5 @@
 ﻿@model ESMB_Intl_Admin_FB.Models.Author
+@*@model ESMB_Intl_Admin_FB.ViewModels.LoginViewModel*@
 
 @{
     ViewBag.Title = "Login";
@@ -14,7 +15,17 @@
                     <h3 class="box-title m-b-20">Admin Login</h3>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            @Html.EditorFor(model => model.AuthorCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Admin Code here" } })
+                            @{
+                                var userCookie = Request.Cookies["userCode"];
+                                if (userCookie != null)
+                                {
+                                    @Html.TextBoxFor(model => model.AuthorCode, new {@Value = @userCookie.Value , @class = "form-control"})
+                                }
+                                else
+                                {
+                                    @Html.EditorFor(model => model.AuthorCode, new {htmlAttributes = new {@class = "form-control", @placeholder = "Enter Admin Code here"}})
+                                }
+                            }
                         </div>
                         <div class="col-xs-12 text-danger">
                             @Html.ValidationMessageFor(model => model.AuthorCode)
@@ -22,9 +33,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12 font-14">
+
                             <div class="checkbox checkbox-primary pull-left p-t-0">
-                                <input id="checkbox-signup" type="checkbox">
-                                <label for="checkbox-signup"> Remember me </label>
+                                <input id="checkbox-signup" name="Remember" type="checkbox">
+                                <label for="checkbox-signup"> Remember me? </label>
+
+                                @*@Html.CheckBoxFor(model => model.Remember)
+                                @Html.LabelFor(model => model.Remember)*@
+
                             </div>
                         </div>
                     </div>

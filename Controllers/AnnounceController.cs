@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Web;
 using System.Web.Mvc;
 using ESMB_Intl_Admin_FB.Models;
@@ -36,13 +37,26 @@ namespace ESMB_Intl_Admin_FB.Controllers
             }
         }
 
-        //IEnumerable<Author> GetAuthor(int id)
-        //{
-        //    using (var db = new TrueDBModel())
-        //    {
-        //        return db.Authors.Include(a => a.TrueAnnouncements).Where(y => y.AuthorID == id).ToList();
-        //    }
-        //}
+        public string GetDateAndTime(int timeStamp)
+        {
+            int? year = 0;
+            int? month = 0;
+            int? date = 0;
+            int? hour = 0;
+            int? minute = 0;
+            while (timeStamp > 1000000000)
+            {
+                year = (timeStamp - timeStamp % 100000000) / 100000000;
+                month = (timeStamp - timeStamp % 1000000) / 1000000 - (year * 100000000);
+                date = (timeStamp - timeStamp % 10000) / 10000 - (year * 100000000 + month * 1000000);
+                hour = (timeStamp - timeStamp % 100) / 100 - (year * 100000000 + month * 1000000 + date * 10000);
+                minute = timeStamp - (year * 100000000 + month * 1000000 + date * 10000 + hour * 100);
+            }
+
+            return (year + 2000).ToString();
+        }
+        
+        
 
         public ActionResult AddOrEdit(int id = 0)
         {
@@ -69,7 +83,7 @@ namespace ESMB_Intl_Admin_FB.Controllers
                     string fileName = Path.GetFileNameWithoutExtension(anno.ImageUpload.FileName);
                     string extension = Path.GetExtension(anno.ImageUpload.FileName);
                     fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;  //确保每个图片文件名唯一，避免上传相同文件
-                    anno.ImgPath = "~/App_Files/Images/" + fileName;
+                    anno.ImgPath = "App_Files/Images/" + fileName;
                     anno.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/App_Files/Images/"), fileName));
                 }
 

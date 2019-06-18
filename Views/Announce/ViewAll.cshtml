@@ -1,4 +1,5 @@
-﻿@using ESMB_Intl_Admin_FB.Models
+﻿@using ESMB_Intl_Admin_FB.Controllers
+@using ESMB_Intl_Admin_FB.Models
 @model IEnumerable<ESMB_Intl_Admin_FB.Models.TrueAnnouncement>
 
 @{
@@ -9,19 +10,19 @@
 
 <table id="demo-foo-addrow2" class="table table-bordered table-hover toggle-circle" data-page-size="10">
     <thead>
-        <tr>
-            @*<th data-sort-initial="true" data-sorted="true" data-direction="DESC">@Html.DisplayNameFor(model => model.AnnoID)</th>*@
-            <th data-toggle="true" class="min-width">@Html.DisplayNameFor(model => model.Sender)</th>
-            @*<th data-hide="all">@Html.DisplayNameFor(model => model.AuthorID)</th>*@
-            <th data-hide="all">@Html.DisplayNameFor(model => model.ImgPath)</th>
-            <th>@Html.DisplayNameFor(model => model.Title)</th>
-            <th data-hide="all">@Html.DisplayNameFor(model => model.Text)</th>
-            <th data-hide="phone" data-sort-initial="true">@Html.DisplayNameFor(model => model.Updated)</th>
-            <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Added)</th>
-            <th data-hide="phone">@Html.DisplayNameFor(model => model.Status)</th>
-            <th data-sort-ignore="true" class="min-width">Actions</th>
-            @* data-sorted="true" data-direction="DESC"*@
-        </tr>
+    <tr>
+        @*<th data-sort-initial="true" data-sorted="true" data-direction="DESC">@Html.DisplayNameFor(model => model.AnnoID)</th>*@
+        <th data-toggle="true" class="min-width">@Html.DisplayNameFor(model => model.Sender)</th>
+        @*<th data-hide="all">@Html.DisplayNameFor(model => model.AuthorID)</th>*@
+        <th data-hide="all">@Html.DisplayNameFor(model => model.ImgPath)</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th data-hide="all">@Html.DisplayNameFor(model => model.Text)</th>
+        <th data-hide="phone" data-sort-initial="true">@Html.DisplayNameFor(model => model.Updated)</th>
+        <th data-hide="phone, tablet">@Html.DisplayNameFor(model => model.Added)</th>
+        <th data-hide="phone">@Html.DisplayNameFor(model => model.Status)</th>
+        <th data-sort-ignore="true" class="min-width">Actions</th>
+        @* data-sorted="true" data-direction="DESC"*@
+    </tr>
     </thead>
     <div class="m-t-40">
         <div class="d-flex">
@@ -55,15 +56,45 @@
                         @rowClass
                     }
                     ">
-            @*<td class="hidden">@Html.DisplayFor(modelItem => item.AnnoID)</td>*@
             <td>@Html.DisplayFor(modelItem => item.Author.AuthorFLName)</td>
 
             @*<td>@Html.DisplayFor(modelItem => item.AuthorID)</td>*@
-            <td><a href="@Html.DisplayFor(modelItem => item.ImgPath)" class="btn btn-link">View Image</a></td>
+        <td>
+            @{
+                var modalId = "ImgPath" + @item.AnnoID;
+                var modalTargetId = "#" + modalId;
+            }
+            <button data-toggle="modal" data-target=@modalTargetId class="btn btn-link">View Image</button>
+            <div class="modal fade" id=@modalId tabindex="-1" role="dialog" aria-labelledby=@modalId aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <img src="@item.ImgPath" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </td>
             <td>@Html.DisplayFor(modelItem => item.Title)</td>
             <td>@Html.DisplayFor(modelItem => item.Text)</td>
-            <td>@Html.DisplayFor(modelItem => item.Updated)</td>
-            <td>@Html.DisplayFor(modelItem => item.Added)</td>
+            
+            @{
+                var year1 = (@item.Updated - @item.Updated % 100000000) / 100000000 + 2000;
+                var month1 = (@item.Updated - @item.Updated % 1000000) / 1000000 - ((year1 - 2000) * 100);
+                var date1 = (@item.Updated - @item.Updated % 10000) / 10000 - ((year1 - 2000) * 10000 + month1 * 100 );
+                var hour1 = (@item.Updated - @item.Updated % 100) / 100 - ((year1 - 2000) * 1000000 + month1 * 10000 + date1 * 100);
+                var minute1 = @item.Updated - ((year1 - 2000) * 100000000 + month1 * 1000000 + date1 * 10000 + hour1 * 100);
+                string stringUpdated = year1 + "/" + month1 + "/" + date1 + ", " + hour1 + ":" + minute1;
+
+                var year2 = (@item.Updated - @item.Updated % 100000000) / 100000000 + 2000;
+                var month2 = (@item.Updated - @item.Updated % 1000000) / 1000000 - ((year2 - 2000) * 100);
+                var date2 = (@item.Updated - @item.Updated % 10000) / 10000 - ((year2 - 2000) * 10000 + month2 * 100 );
+                var hour2 = (@item.Updated - @item.Updated % 100) / 100 - ((year2 - 2000) * 1000000 + month2 * 10000 + date2 * 100);
+                var minute2 = @item.Updated - ((year2 - 2000) * 100000000 + month2 * 1000000 + date2 * 10000 + hour2 * 100);
+                string stringAdded = year2 + "/" + month2 + "/" + date2 + ", " + hour2 + ":" + minute2;
+            }
+            <td>@stringUpdated</td>
+            <td>@stringAdded</td>
+            
+            @*<td>@Html.DisplayFor(modelItem => item.Added)</td>*@
 
             <td>
                 @{
@@ -100,15 +131,15 @@
                             <input type="hidden" name="ImgPath" value="@item.ImgPath" />
                             <input type="hidden" name="Status" value="Published" />
                             @*@Html.HiddenFor(modelItem => item.AnnoID)
-                        @Html.HiddenFor(modelItem => item.AuthorID)
-                        @Html.HiddenFor(modelItem => item.Title)
-                        @Html.HiddenFor(modelItem => item.Text)
-                        @Html.HiddenFor(modelItem => item.Added)
-                        @Html.HiddenFor(modelItem => item.Updated)
-                        @Html.HiddenFor(modelItem => item.Sender)
-                        @Html.HiddenFor(modelItem => item.ImgPath)
-                        @Html.TextBoxFor(modelItem => item.Status, new { @Value = "Published", @type = "hidden" })*@
-                            <button class="btn btn-link btn-sm" type="submit"><i class="ti-check"></i></button>
+                            @Html.HiddenFor(modelItem => item.AuthorID)
+                            @Html.HiddenFor(modelItem => item.Title)
+                            @Html.HiddenFor(modelItem => item.Text)
+                            @Html.HiddenFor(modelItem => item.Added)
+                            @Html.HiddenFor(modelItem => item.Updated)
+                            @Html.HiddenFor(modelItem => item.Sender)
+                            @Html.HiddenFor(modelItem => item.ImgPath)
+                            @Html.TextBoxFor(modelItem => item.Status, new { @Value = "Published", @type = "hidden" })*@
+                            <button class="btn btn-link btn-sm text-decoration-none" type="submit"><i class="ti-check"></i></button>
                         }
                     }
                 }
@@ -128,7 +159,5 @@
     </tr>
     </tfoot>
 </table>
-
-
 
 

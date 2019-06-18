@@ -16,7 +16,7 @@ namespace ESMB_Intl_Admin_FB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Authorize(ESMB_Intl_Admin_FB.Models.Author userModel)
+        public ActionResult Authorize(Author userModel)
         {
             using (var db = new TrueDBModel())
             {
@@ -28,14 +28,22 @@ namespace ESMB_Intl_Admin_FB.Controllers
                     return View("Login", userModel);
                 }
                 // Correct input
+                Session["userID"] = userDetails.AuthorID;
+                Session["userCode"]  = userDetails.AuthorCode;
+                Session["userLevel"] = userDetails.AuthorLevel;
+                Session["userName"]  = userDetails.AuthorFLName;
+
+                if (userDetails.Remember)
+                {
+                    Response.Cookies["userCode"].Value = userDetails.AuthorCode;
+                    Response.Cookies["userCode"].Expires = DateTime.Now.AddMinutes(1);
+                }
                 else
                 {
-                    Session["userID"] = userDetails.AuthorID;
-                    Session["userCode"]  = userDetails.AuthorCode;
-                    Session["userLevel"] = userDetails.AuthorLevel;
-                    Session["userName"]  = userDetails.AuthorFLName;
-                    return RedirectToAction("Index", "Announce");
+                    Response.Cookies["userCode"].Expires = DateTime.Now.AddMinutes(-1);
+
                 }
+                return RedirectToAction("Index", "Announce");
             }
         }
 
