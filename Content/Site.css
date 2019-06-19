@@ -17,3 +17,12 @@ select,
 textarea {
     max-width: 280px;
 }*/
+
+.login-register {
+    /*background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2));*/
+    background-image: url("../App_Files/Backgrounds/login-bg-1-tran.jpg");
+}
+
+.login-box {
+    margin-top: 30vh;
+}

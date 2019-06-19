@@ -37,27 +37,6 @@ namespace ESMB_Intl_Admin_FB.Controllers
             }
         }
 
-        public string GetDateAndTime(int timeStamp)
-        {
-            int? year = 0;
-            int? month = 0;
-            int? date = 0;
-            int? hour = 0;
-            int? minute = 0;
-            while (timeStamp > 1000000000)
-            {
-                year = (timeStamp - timeStamp % 100000000) / 100000000;
-                month = (timeStamp - timeStamp % 1000000) / 1000000 - (year * 100000000);
-                date = (timeStamp - timeStamp % 10000) / 10000 - (year * 100000000 + month * 1000000);
-                hour = (timeStamp - timeStamp % 100) / 100 - (year * 100000000 + month * 1000000 + date * 10000);
-                minute = timeStamp - (year * 100000000 + month * 1000000 + date * 10000 + hour * 100);
-            }
-
-            return (year + 2000).ToString();
-        }
-        
-        
-
         public ActionResult AddOrEdit(int id = 0)
         {
             var anno = new TrueAnnouncement();
